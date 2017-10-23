@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var User = require('../app/models/users');
-var todo = require('../app/models/todos');
+var Todo = require('../app/models/todos');
 //During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 
@@ -139,7 +139,7 @@ describe('User', () => {
 });
 describe('todo', () => {
 	    beforeEach((done) => { 
-		       todo.remove({}, (err) => {
+		       Todo.remove({}, (err) => {
 	            done();
 	        });
 	    });
@@ -169,88 +169,90 @@ describe('todo', () => {
 		                done();
 		            });
 		    });
-// });
-// 		it('it should GET a users todos', (done) => {
-// 			        var todo = new ToDo({
-// 			            "userId": USER_ID,
-// 			            "todo": "This is my ToDo"
-// 			        })
-// 			        todo.save((err, todo) => {      
-// 			            chai.request(server)
-// 			                .get('/api/todos/user/' + USER_ID)
-// 			                .end((err, res) => {            
-// 			                    res.should.have.status(200);
-// 			                    res.body.should.be.a('array');
-// 			                    res.body.length.should.be.eql(1);
-// 			                    done();
-// 			                });
-// 			        });
-// 			    });
-// 			    it('it should GET a todo', (done) => {
-// 				        var todo = new ToDo({
-// 				            "userId": USER_ID,
-// 				            "todo": "This is my ToDo"
-// 				        })
-// 				        todo.save((err, todo) => {      
-// 				            chai.request(server)
-// 				                .get('/api/todos/' + todo._id)
-// 				                .end((err, res) => {            
-// 				                    res.should.have.status(200);
-// 				                    res.body.should.be.a('object');
-// 				                    res.body.should.have.property('userId');
-// 				                    res.body.should.have.property('todo');
-// 				                    res.body.should.have.property('completed');
-// 				                    res.body.should.have.property('dateCreated');
-// 				                    res.body.should.have.property('_id').eql(todo._id.toString());
-// 				                    done();
-// 				                });
-// 				        });
-// 				    });
-// 				    it('it should UPDATE a todo', (done) => {
-// 					        
-// 					        var todo = new ToDo({
-// 					            "userId": USER_ID,
-// 					            "todo": "This is my ToDo",
-// 					            "description": "This is a description"
-// 					        })
-// 					todo.save((err, todo) => {
-// 						                chai.request(server)
-// 						                .put('/api/todos/' + todo._id)
-// 						                .send({
-// 						                    "_id": todo._id,
-// 						                    "userId": USER_ID,
-// 						                    "todo": "Get it done!",
-// 						                    "description": "I don't need a description",
-// 						                    })
-// 						                .end((err, res) => {
-// 						                    res.should.have.status(200);
-// 						                    res.body.should.be.a('object');
-// 						                    res.body.should.have.property('todo').eql('Get it done!');
-// 						                    res.body.should.have.property('description').eql("I don't need a description");
-// 						                    done();
-// 						                });
-// 						        });
-// 						    }); 
-// it('it should DELETE a todo given the id', (done) => {
-//         var todo = new ToDo({
-//             "userId": USER_ID,
-//             "todo": "This is my ToDo",
-//             "description": "This is a description"
-//         })
-//         todo.save((err, todo) => {
-// 	chai.request(server)
-// 	.delete('/api/todos/' + todo.id)
-// 	.end((err, res) => {
-// 		res.should.have.status(200);
-//                    	done();
-// 	});
-//          });
-//     });
+		it('it should GET a users todos', (done) => {
+			        var todo = new Todo({
+			            "userId": USER_ID,
+			            "todo": "This is my ToDo",
+						"description":"alskdfj"
+
+			        })
+			        todo.save((err, todo) => {      
+			            chai.request(server)
+			                .get('/api/todos/user/' + USER_ID)
+			                .end((err, res) => {            
+			                    res.should.have.status(200);
+			                    res.body.should.be.a('array');
+			                    res.body.length.should.be.eql(1);
+			                    done();
+			                });
+			        });
+			    });
+			    it('it should GET a todo', (done) => {
+				        var todo = new Todo({
+				            "userId": USER_ID,
+				            "todo": "This is my ToDo",
+				            "description":"alskdfj"
+				        })
+				        todo.save((err, todo) => {      
+				            chai.request(server)
+				                .get('/api/todos/' + todo._id)
+				                .end((err, res) => {            
+				                    res.should.have.status(200);
+				                    res.body.should.be.a('object');
+				                    res.body.should.have.property('userId');
+				                    res.body.should.have.property('todo');
+				                    res.body.should.have.property('completed');
+				                    res.body.should.have.property('dateCreated');
+				                    res.body.should.have.property('_id').eql(todo._id.toString());
+				                    done();
+				                });
+				        });
+				    });
+				    it('it should UPDATE a todo', (done) => {
+					        
+					        var todo = new Todo({
+					            "userId": USER_ID,
+					            "todo": "This is my ToDo",
+					            "description": "This is a description"
+					        })
+					todo.save((err, todo) => {
+						                chai.request(server)
+						                .put('/api/todos/' + todo._id)
+						                .send({
+						                    "_id": todo._id,
+						                    "userId": USER_ID,
+						                    "todo": "Get it done!",
+						                    "description": "I don't need a description",
+						                    })
+						                .end((err, res) => {
+						                    res.should.have.status(200);
+						                    res.body.should.be.a('object');
+						                    res.body.should.have.property('todo').eql('Get it done!');
+						                    res.body.should.have.property('description').eql("I don't need a description");
+						                    done();
+						                });
+						        });
+						    }); 
+it('it should DELETE a todo given the id', (done) => {
+        var todo = new Todo({
+            "userId": USER_ID,
+            "todo": "This is my ToDo",
+            "description": "This is a description"
+        })
+        todo.save((err, todo) => {
+	chai.request(server)
+	.delete('/api/todos/' + todo.id)
+	.end((err, res) => {
+		res.should.have.status(200);
+                   	done();
+	});
+         });
+    });
 																				
-// 	});
+	});
 	
 
-});
+//});
 
 describe('Test', function() {
 	
@@ -263,6 +265,7 @@ describe('Test', function() {
 			done();
 			});
 	});
+	
    it('it should return 404', (done) => {
 	  chai.request(server)		
 	  .get('/index2.html')
