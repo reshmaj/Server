@@ -155,7 +155,8 @@ describe('todo', () => {
 	it('it should POST a todo', (done) => {
 		        var todo = {
 		            "userId": USER_ID,
-		            "todo": "This is my ToDo"
+		            "todo": "This is my ToDo",
+					"description":"alskdfj"
 		          }       
 		        chai.request(server)
 		            .post('/api/todos')
@@ -248,25 +249,27 @@ describe('todo', () => {
 																				
 // 	});
 	
-describe('Test', function() {
-  
-  it('it should GET the index.html file', (done) => {
-      chai.request(server)
-          .get('/index.html')
-          .end((err, res) => {
-              res.should.have.status(200);
-              res.should.be.html;
-          done();
-          });
-  });
- it('it should return 404', (done) => {
-    chai.request(server)		
-    .get('/index2.html')
- 		.end((err, res) => {
- 			res.should.have.status(404);
- 		done();
- 		});
- });
 
 });
-});
+
+describe('Test', function() {
+	
+	it('it should GET the index.html file', (done) => {
+		chai.request(server)
+			.get('/index.html')
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.should.be.html;
+			done();
+			});
+	});
+   it('it should return 404', (done) => {
+	  chai.request(server)		
+	  .get('/index2.html')
+		   .end((err, res) => {
+			   res.should.have.status(404);
+		   done();
+		   });
+   });
+  
+  });
