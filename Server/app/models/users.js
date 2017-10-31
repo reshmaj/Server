@@ -1,7 +1,6 @@
 var Mongoose = require('mongoose');
 var Schema = Mongoose.Schema;
 
-//Define userschema
 
 var UserSchema = new Schema({
  firstName:{type: String, required:true },
