@@ -1,3 +1,4 @@
+import { Users } from '../resources/data/users';
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
@@ -8,9 +9,29 @@ export class Home {
           this.message = 'Home';
   }
 
-  login(){
-	  this.router.navigate('list');
-  }
+  showRegister(){
+    this.user = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
+        }
+        this.registerError = "";
+        this.showLogin = false;
+}
+
+    async save() {
+    console.log()
+          let serverResponse = await this.users.save(this.user);
+          if (!serverResponse.error) {
+            this.showLogin = true;
+          } else {
+            this.registerError = "There was a problem registering the user."
+          }
+    }
+login(){
+    this.router.navigate('list');
+}
 }
 
 

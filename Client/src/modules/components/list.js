@@ -1,9 +1,3 @@
-export class List {
-	constructor(){
-		this.message = "List";
-	}
-}
-
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
