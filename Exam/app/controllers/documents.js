@@ -12,7 +12,7 @@ module.exports = function (app, config) {
 app.use('/api', router);
 
 //Gets all the Documents using GET function
-router.get('/Documents', function (req, res, next){
+router.get('/Docs', function (req, res, next){
            console.log('Get all the documents', 'verbose');
            var query = Newdocum.find()
            .then(result => {
@@ -21,14 +21,14 @@ router.get('/Documents', function (req, res, next){
                 } else {
                         res.status(404).json({message: "No documents"});
     }
-   })
+   })  
         .catch(err => {
         return next(err);
    });
 });
 
 //Creates a new Document object from the data sent in the request using the Document model
-router.post('/Documents', function(req, res, next){
+router.post('/Docs', function(req, res, next){
             console.log('Create a document', 'verbose');
             var newdocum = new Newdocum(req.body);
             newdocum.save()
