@@ -1,6 +1,9 @@
+import {AuthorizeStep} from 'aurelia-auth';
+
 export class App {
   configureRouter(config, router) {
     this.router = router;
+    config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       { 
 	route: ['', 'home'],
@@ -10,8 +13,9 @@ export class App {
       {
 	 route: 'list',
 	 moduleId: './modules/list',
-	 name: 'List' 
-     }
+   name: 'List',
+   auth: true 
+   }
     ]);
   }
 }

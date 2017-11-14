@@ -1,13 +1,33 @@
 import { Users } from '../resources/data/users';
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import {AuthService} from 'aurelia-auth';
 
-@inject(Router)
+
+@inject(Router, Users, AuthService)
 export class Home {
-  constructor(router) {
-	this.router = router;
-          this.message = 'Home';
+  constructor(router, users, auth) {
+    this.router = router;
+    this.auth = auth;
+    this.loginError = '';
+    this.users = users;
+    this.message = 'Home';
+    this.showLogin = true;
+          
   }
+
+  login(){
+  return this.auth.login(this.email, this.password)
+  .then(response => {
+  sessionStorage.setItem("user", JSON.stringify(response.user));
+  this.loginError = "";
+  this.router.navigate('list');
+  })
+  .catch(error => {
+    console.log(error);
+    this.loginError = "Invalid credentials.";
+  });
+};
 
   showRegister(){
     this.user = {
@@ -21,7 +41,7 @@ export class Home {
 }
 
     async save() {
-    console.log()
+    console.log(this.user)
           let serverResponse = await this.users.save(this.user);
           if (!serverResponse.error) {
             this.showLogin = true;
@@ -29,9 +49,5 @@ export class Home {
             this.registerError = "There was a problem registering the user."
           }
     }
-login(){
-    this.router.navigate('list');
-}
-}
 
-
+}
