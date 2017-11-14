@@ -1,7 +1,6 @@
 var express = require('express'),
     router = express.Router(),
     logger = require('../../config/logger'),
-
     mongoose = require('mongoose'),
     passportService = require('../../config/passport'),
     passport = require('passport'),

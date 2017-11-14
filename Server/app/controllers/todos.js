@@ -1,15 +1,17 @@
 var express = require('express'),
 router = express.Router(),
-logger = require('../../config/logger');
+logger = require('../../config/logger'),
 
-var mongoose = require('mongoose');
-var Todo = mongoose.model('todos');
-    
+mongoose = require('mongoose'),
+Todo = mongoose.model('todos'),
+passportService = require('../../config/passport'),
+passport = require('passport');
+var requireAuth = passport.authenticate('jwt', { session: false });   
 
 module.exports = function (app, config) {
     app.use('/api', router);
     
-    router.get('/todos/user/:userId', function (req, res, next){
+    router.get('/todos/user/:userId', requireAuth, function (req, res, next){
         logger.log('Get ToDos for a user', 'verbose');
 
        var query = Todo.find({UserId:req.params.todoId})
@@ -27,7 +29,7 @@ module.exports = function (app, config) {
        });
    });
 
-    router.get('/todos/:todoId', function (req, res, next){
+    router.get('/todos/:todoId', requireAuth, function (req, res, next){
         logger.log('Get user'+ req.params.todoId, 'verbose');
 
         Todo.findById(req.params.todoId)
@@ -56,7 +58,7 @@ module.exports = function (app, config) {
        });
      });
   
-    router.put('/todos/:todoId', function (req, res, next){
+    router.put('/todos/:todoId', requireAuth, function (req, res, next){
         logger.log('Update Todo with id ToDoid'+ req.params.todoId, 'verbose');
 
         Todo.findOneAndUpdate({_id: req.params.todoId}, 		
@@ -69,7 +71,7 @@ module.exports = function (app, config) {
                });
        });  
 
-    router.delete('/todos/:todoId', function (req, res, next){
+    router.delete('/todos/:todoId', requireAuth, function (req, res, next){
         logger.log('Delete ToDo with id ToDoid'+ req.params.todoId, 'verbose');
 
         Todo.remove({ _id: req.params.todoId })
