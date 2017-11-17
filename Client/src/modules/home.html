@@ -1,7 +1,8 @@
 <template>
-    <div class="container"></div>
+    <div class="container">
         <h1>${message}</h1> 
         <compose show.bind="showLogin" view="./components/login.html"></compose>
         <compose show.bind="!showLogin" view="./components/register.html"></compose>
+</div>
     </template>
     

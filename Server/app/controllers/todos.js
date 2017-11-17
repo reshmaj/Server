@@ -43,7 +43,7 @@ module.exports = function (app, config) {
                    .catch(error => {
                        return next(error);
                    });
-           });    ;;
+           });   
 
     router.post('/todos', function(req, res, next){
         logger.log('Create a ToDo', 'verbose');

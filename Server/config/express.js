@@ -65,7 +65,7 @@ res.status(200).json(users);
       res.send('404 Not Found');
     });
     app.use(function (err, req, res, next) {
-      console.log(err)
+      console.log(err);
       if (process.env.NODE_ENV !== 'test') logger.log(err.stack,'error');
       res.type('text/plan');
       if(err.status){

@@ -50,10 +50,8 @@ setUserInfo = function(req){
   };
   var jwtOptions = {
     jwtFromRequest: extractJwt. fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.secret,
-   issuer : 'com.microsoft.example',
-    audience : "com.chirps.www"
-  };
+    secretOrKey: config.secret
+     };
   
   var jwtLogin = new jwtStrategy(jwtOptions, function(payload, next){
     User.findById(payload._id).exec()

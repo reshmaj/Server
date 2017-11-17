@@ -1,6 +1,6 @@
 var Mongoose = require('mongoose');
 var Schema = Mongoose.Schema;
-
+var Bcrypt = require('bcryptjs');
 
 var UserSchema = new Schema({
  firstName:{type: String, required:true },
@@ -11,7 +11,7 @@ var UserSchema = new Schema({
  Status: {type:Boolean, default: true}
 });
 
-var Bcrypt = require('bcryptjs');
+
 UserSchema.pre('save', function (next) {
     var person = this;
     if (this.isModified('password') || this.isNew) { 
