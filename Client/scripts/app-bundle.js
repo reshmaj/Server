@@ -1,4 +1,4 @@
-define('app',['exports', 'aurelia-framework', 'aurelia-auth'], function (exports, _aureliaFramework, _aureliaAuth) {
+define('app',['exports', 'aurelia-auth'], function (exports, _aureliaAuth) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -103,7 +103,7 @@ define('main',['exports', './environment', 'regenerator-runtime', './auth-config
     });
   }
 });
-define('modules/home',['exports', '../resources/data/users', 'aurelia-framework', 'aurelia-router', 'aurelia-auth'], function (exports, _users, _aureliaFramework, _aureliaRouter, _aureliaAuth) {
+define('modules/home',['exports', 'aurelia-framework', 'aurelia-router', '../resources/data/users', 'aurelia-auth'], function (exports, _aureliaFramework, _aureliaRouter, _users, _aureliaAuth) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -168,6 +168,7 @@ define('modules/home',['exports', '../resources/data/users', 'aurelia-framework'
         password: ""
       };
       this.registerError = "";
+
       this.showLogin = false;
     };
 
@@ -222,149 +223,148 @@ define('modules/home',['exports', '../resources/data/users', 'aurelia-framework'
     return Home;
   }()) || _class);
 });
-define('modules/list',['exports', 'aurelia-framework', '../resources/data/todos', 'aurelia-auth'], function (exports, _aureliaFramework, _todos, _aureliaAuth) {
-  'use strict';
+define('modules/list',['exports', 'aurelia-framework', '../resources/data/todos', 'aurelia-router', 'aurelia-auth'], function (exports, _aureliaFramework, _todos, _aureliaRouter, _aureliaAuth) {
+    'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.List = undefined;
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.List = undefined;
 
-  function _asyncToGenerator(fn) {
-    return function () {
-      var gen = fn.apply(this, arguments);
-      return new Promise(function (resolve, reject) {
-        function step(key, arg) {
-          try {
-            var info = gen[key](arg);
-            var value = info.value;
-          } catch (error) {
-            reject(error);
-            return;
-          }
+    function _asyncToGenerator(fn) {
+        return function () {
+            var gen = fn.apply(this, arguments);
+            return new Promise(function (resolve, reject) {
+                function step(key, arg) {
+                    try {
+                        var info = gen[key](arg);
+                        var value = info.value;
+                    } catch (error) {
+                        reject(error);
+                        return;
+                    }
 
-          if (info.done) {
-            resolve(value);
-          } else {
-            return Promise.resolve(value).then(function (value) {
-              step("next", value);
-            }, function (err) {
-              step("throw", err);
-            });
-          }
-        }
-
-        return step("next");
-      });
-    };
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _dec, _class;
-
-  var List = exports.List = (_dec = (0, _aureliaFramework.inject)(_todos.ToDos, _aureliaAuth.AuthService), _dec(_class = function () {
-    function List(todos, auth) {
-      _classCallCheck(this, List);
-
-      this.todos = todos;
-      this.auth = auth;
-      this.user = JSON.parse(sessionStorage.getItem('user'));
-      this.title = "Reshma Has Things ToDo!";
-      this.editTodoForm = false;
-      this.showCompleted = false;
-      this.showList = true;
-      this.priorities = ['Low', 'Medium', 'High', 'Critical'];
-    }
-
-    List.prototype.activate = function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.todos.getUserTodos(this.user._id);
-
-              case 2:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function activate() {
-        return _ref.apply(this, arguments);
-      }
-
-      return activate;
-    }();
-
-    List.prototype.createTodo = function createTodo() {
-      this.todoObj = {
-        todo: "",
-        description: "",
-        dateDue: new Date(),
-        userId: this.user._id,
-        priority: this.priorities[0]
-      };
-      this.showList = false;
-    };
-
-    List.prototype.saveTodo = function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-        var response;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (!this.todoObj) {
-                  _context2.next = 6;
-                  break;
+                    if (info.done) {
+                        resolve(value);
+                    } else {
+                        return Promise.resolve(value).then(function (value) {
+                            step("next", value);
+                        }, function (err) {
+                            step("throw", err);
+                        });
+                    }
                 }
 
-                _context2.next = 3;
-                return this.todos.save(this.todoObj);
+                return step("next");
+            });
+        };
+    }
 
-              case 3:
-                response = _context2.sent;
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
 
-                if (response.error) {
-                  alert("There was an error creating the ToDo");
-                } else {}
-                this.showList = true;
+    var _dec, _class;
 
-              case 6:
-              case 'end':
-                return _context2.stop();
+    var List = exports.List = (_dec = (0, _aureliaFramework.inject)(_aureliaRouter.Router, _aureliaAuth.AuthService, _todos.ToDos), _dec(_class = function () {
+        function List(router, auth, todos) {
+            _classCallCheck(this, List);
+
+            this.router = router;
+            this.todos = todos;
+            this.auth = auth;
+
+            this.user = JSON.parse(sessionStorage.getItem('user'));
+            this.priorities = ['Low', 'Medium', 'High', 'Critical'];
+            this.showList = true;
+        }
+
+        List.prototype.activate = function () {
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return this.todos.getUserTodos(this.user._id);
+
+                            case 2:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function activate() {
+                return _ref.apply(this, arguments);
             }
-          }
-        }, _callee2, this);
-      }));
 
-      function saveTodo() {
-        return _ref2.apply(this, arguments);
-      }
+            return activate;
+        }();
 
-      return saveTodo;
-    }();
+        List.prototype.createTodo = function createTodo() {
+            this.todoObj = {
+                todos: "",
+                description: "",
+                dateDue: new Date(),
+                userId: this.user._id,
+                priority: this.priorities[0]
+            };
+            this.showList = false;
+        };
 
-    List.prototype.back = function back() {
-      this.showlist = true;
-    };
+        List.prototype.saveTodo = function () {
+            var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+                var response;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                if (!this.todoObj) {
+                                    _context2.next = 6;
+                                    break;
+                                }
 
-    List.prototype.logout = function logout() {
-      sessionStorage.removeItem('user');
-      this.auth.logout();
-    };
+                                _context2.next = 3;
+                                return this.todos.save(this.todoObj);
 
-    return List;
-  }()) || _class);
+                            case 3:
+                                response = _context2.sent;
+
+                                if (response.error) {
+                                    alert("There was an error creating the ToDo");
+                                } else {}
+                                this.showList = true;
+
+                            case 6:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function saveTodo() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return saveTodo;
+        }();
+
+        List.prototype.back = function back() {
+            this.showlist = true;
+        };
+
+        List.prototype.logout = function logout() {
+            sessionStorage.removeItem('user');
+            this.auth.logout();
+        };
+
+        return List;
+    }()) || _class);
 });
 define('resources/index',["exports"], function (exports) {
   "use strict";
@@ -376,213 +376,228 @@ define('resources/index',["exports"], function (exports) {
   function configure(config) {}
 });
 define('resources/data/data-services',['exports', 'aurelia-framework', 'aurelia-fetch-client'], function (exports, _aureliaFramework, _aureliaFetchClient) {
-	'use strict';
+    'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.DataServices = undefined;
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.DataServices = undefined;
 
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
 
-	var _dec, _class;
+    var _dec, _class;
 
-	var DataServices = exports.DataServices = (_dec = (0, _aureliaFramework.inject)(_aureliaFetchClient.HttpClient), _dec(_class = function () {
-		function DataServices(http) {
-			var _this = this;
+    var DataServices = exports.DataServices = (_dec = (0, _aureliaFramework.inject)(_aureliaFetchClient.HttpClient), _dec(_class = function () {
+        function DataServices(http) {
+            var _this = this;
 
-			_classCallCheck(this, DataServices);
+            _classCallCheck(this, DataServices);
 
-			this.httpClient = http;
-			this.BASE_URL = "http://localhost:5000/api/";
-			this.httpClient.configure(function (config) {
-				config.withBaseUrl(_this.BASE_URL).withDefaults({
-					credentials: 'same-origin',
-					headers: {
-						'Accept': 'application/json',
-						'X-Requested-With': 'Fetch'
-					}
-				}).withInterceptor({
-					request: function request(_request) {
-						console.log('Requesting ' + _request.method + ' ' + _request.url);
-						return _request;
-					},
-					response: function response(_response) {
-						console.log('Received ' + _response.status + ' ' + _response.url);
-						return _response;
-					}
-				});
-			});
-		}
+            this.httpClient = http;
 
-		DataServices.prototype.get = function get(url) {
-			return this.httpClient.fetch(url).then(function (response) {
-				return response.json();
-			}).then(function (data) {
-				return data;
-			}).catch(function (error) {
-				return error;
-			});
-		};
+            this.BASE_URL = "http://localhost:5000/api/";
 
-		DataServices.prototype.post = function post(content, url) {
-			return this.httpClient.fetch(url, {
-				method: 'post',
-				body: (0, _aureliaFetchClient.json)(content)
-			}).then(function (response) {
-				return response.json();
-			}).then(function (object) {
-				return object;
-			}).catch(function (error) {
-				return error;
-			});
-		};
+            this.httpClient.configure(function (config) {
+                config.withBaseUrl(_this.BASE_URL).withDefaults({
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'Fetch'
+                    }
+                }).withInterceptor({
+                    request: function request(_request) {
+                        console.log('Requesting ' + _request.method + ' ' + _request.url);
+                        return _request;
+                    },
+                    response: function response(_response) {
+                        console.log('Received ' + _response.status + ' ' + _response.url);
+                        return _response;
+                    }
+                });
+            });
+        }
 
-		DataServices.prototype.delete = function _delete(url) {
-			return this.httpClient.fetch(url, {
-				method: 'delete'
-			}).then(function (response) {
-				return response.json();
-			}).then(function (object) {
-				return object;
-			}).catch(function (error) {
-				return error;
-			});
-		};
+        DataServices.prototype.get = function get(url) {
+            return this.httpClient.fetch(url).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                return data;
+            }).catch(function (error) {
+                return error;
+            });
+        };
 
-		return DataServices;
-	}()) || _class);
+        DataServices.prototype.post = function post(content, url) {
+            return this.httpClient.fetch(url, {
+                method: 'post',
+                body: (0, _aureliaFetchClient.json)(content)
+            }).then(function (response) {
+                return response.json();
+            }).then(function (object) {
+                return object;
+            }).catch(function (error) {
+                return error;
+            });
+        };
+
+        DataServices.prototype.put = function put(content, url) {
+            return this.httpClient.fetch(url, {
+                method: 'put',
+                body: (0, _aureliaFetchClient.json)(content)
+            }).then(function (response) {
+                return response.json();
+            }).then(function (object) {
+                return object;
+            }).catch(function (error) {
+                return error;
+            });
+        };
+
+        DataServices.prototype.delete = function _delete(url) {
+            return this.httpClient.fetch(url, {
+                method: 'delete'
+            }).then(function (response) {
+                return response.json();
+            }).then(function (object) {
+                return object;
+            }).catch(function (error) {
+                return error;
+            });
+        };
+
+        return DataServices;
+    }()) || _class);
 });
 define('resources/data/todos',['exports', 'aurelia-framework', './data-services'], function (exports, _aureliaFramework, _dataServices) {
-                'use strict';
+    'use strict';
 
-                Object.defineProperty(exports, "__esModule", {
-                                value: true
-                });
-                exports.ToDos = undefined;
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.ToDos = undefined;
 
-                function _asyncToGenerator(fn) {
-                                return function () {
-                                                var gen = fn.apply(this, arguments);
-                                                return new Promise(function (resolve, reject) {
-                                                                function step(key, arg) {
-                                                                                try {
-                                                                                                var info = gen[key](arg);
-                                                                                                var value = info.value;
-                                                                                } catch (error) {
-                                                                                                reject(error);
-                                                                                                return;
-                                                                                }
+    function _asyncToGenerator(fn) {
+        return function () {
+            var gen = fn.apply(this, arguments);
+            return new Promise(function (resolve, reject) {
+                function step(key, arg) {
+                    try {
+                        var info = gen[key](arg);
+                        var value = info.value;
+                    } catch (error) {
+                        reject(error);
+                        return;
+                    }
 
-                                                                                if (info.done) {
-                                                                                                resolve(value);
-                                                                                } else {
-                                                                                                return Promise.resolve(value).then(function (value) {
-                                                                                                                step("next", value);
-                                                                                                }, function (err) {
-                                                                                                                step("throw", err);
-                                                                                                });
-                                                                                }
-                                                                }
-
-                                                                return step("next");
-                                                });
-                                };
+                    if (info.done) {
+                        resolve(value);
+                    } else {
+                        return Promise.resolve(value).then(function (value) {
+                            step("next", value);
+                        }, function (err) {
+                            step("throw", err);
+                        });
+                    }
                 }
 
-                function _classCallCheck(instance, Constructor) {
-                                if (!(instance instanceof Constructor)) {
-                                                throw new TypeError("Cannot call a class as a function");
+                return step("next");
+            });
+        };
+    }
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
+    var _dec, _class;
+
+    var ToDos = exports.ToDos = (_dec = (0, _aureliaFramework.inject)(_dataServices.DataServices), _dec(_class = function () {
+        function ToDos(data) {
+            _classCallCheck(this, ToDos);
+
+            this.data = data;
+            this.TODO_SERVICE = 'todos';
+            this.todosArray = new Array();
+        }
+
+        ToDos.prototype.getUserTodos = function () {
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(id) {
+                var response;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return this.data.get(this.TODO_SERVICE + "/user/" + id);
+
+                            case 2:
+                                response = _context.sent;
+
+                                if (!response.error && !response.message) {
+                                    this.todosArray = response;
                                 }
-                }
 
-                var _dec, _class;
+                            case 4:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
 
-                var ToDos = exports.ToDos = (_dec = (0, _aureliaFramework.inject)(_dataServices.DataServices), _dec(_class = function () {
-                                function ToDos(data) {
-                                                _classCallCheck(this, ToDos);
+            function getUserTodos(_x) {
+                return _ref.apply(this, arguments);
+            }
 
-                                                this.data = data;
-                                                this.TODO_SERVICE = 'todos';
-                                                this.todosArray = [];
+            return getUserTodos;
+        }();
+
+        ToDos.prototype.save = function () {
+            var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(todo) {
+                var serverResponse;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                if (!todo) {
+                                    _context2.next = 6;
+                                    break;
                                 }
 
-                                ToDos.prototype.getUserTodos = function () {
-                                                var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(id) {
-                                                                var response;
-                                                                return regeneratorRuntime.wrap(function _callee$(_context) {
-                                                                                while (1) {
-                                                                                                switch (_context.prev = _context.next) {
-                                                                                                                case 0:
-                                                                                                                                _context.next = 2;
-                                                                                                                                return this.data.get(this.TODO_SERVICE + "/user/" + id);
+                                _context2.next = 3;
+                                return this.data.post(todo, this.TODO_SERVICE);
 
-                                                                                                                case 2:
-                                                                                                                                response = _context.sent;
+                            case 3:
+                                serverResponse = _context2.sent;
 
-                                                                                                                                if (!response.error && !response.message) {
-                                                                                                                                                this.todosArray = response;
-                                                                                                                                }
+                                if (!serverResponse.error) {
+                                    this.todosArray.push(serverResponse);
+                                }
+                                return _context2.abrupt('return', serverResponse);
 
-                                                                                                                case 4:
-                                                                                                                case 'end':
-                                                                                                                                return _context.stop();
-                                                                                                }
-                                                                                }
-                                                                }, _callee, this);
-                                                }));
+                            case 6:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
 
-                                                function getUserTodos(_x) {
-                                                                return _ref.apply(this, arguments);
-                                                }
+            function save(_x2) {
+                return _ref2.apply(this, arguments);
+            }
 
-                                                return getUserTodos;
-                                }();
+            return save;
+        }();
 
-                                ToDos.prototype.save = function () {
-                                                var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(todo) {
-                                                                var serverResponse;
-                                                                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                                                                                while (1) {
-                                                                                                switch (_context2.prev = _context2.next) {
-                                                                                                                case 0:
-                                                                                                                                if (!todo) {
-                                                                                                                                                _context2.next = 6;
-                                                                                                                                                break;
-                                                                                                                                }
-
-                                                                                                                                _context2.next = 3;
-                                                                                                                                return this.data.post(todo, this.TODO_SERVICE);
-
-                                                                                                                case 3:
-                                                                                                                                serverResponse = _context2.sent;
-
-                                                                                                                                if (!serverResponse.error) {
-                                                                                                                                                this.todosArray.push(serverResponse);
-                                                                                                                                }
-                                                                                                                                return _context2.abrupt('return', serverResponse);
-
-                                                                                                                case 6:
-                                                                                                                case 'end':
-                                                                                                                                return _context2.stop();
-                                                                                                }
-                                                                                }
-                                                                }, _callee2, this);
-                                                }));
-
-                                                function save(_x2) {
-                                                                return _ref2.apply(this, arguments);
-                                                }
-
-                                                return save;
-                                }();
-
-                                return ToDos;
-                }()) || _class);
+        return ToDos;
+    }()) || _class);
 });
 define('resources/data/users',['exports', 'aurelia-framework', './data-services'], function (exports, _aureliaFramework, _dataServices) {
     'use strict';
@@ -627,13 +642,14 @@ define('resources/data/users',['exports', 'aurelia-framework', './data-services'
         }
     }
 
-    (0, _aureliaFramework.inject)(_dataServices.DataServices);
+    var _dec, _class;
 
-    var Users = exports.Users = function () {
+    var Users = exports.Users = (_dec = (0, _aureliaFramework.inject)(_dataServices.DataServices), _dec(_class = function () {
         function Users(data) {
             _classCallCheck(this, Users);
 
             this.data = data;
+
             this.USER_SERVICE = 'users';
         }
 
@@ -672,14 +688,14 @@ define('resources/data/users',['exports', 'aurelia-framework', './data-services'
         }();
 
         return Users;
-    }();
+    }()) || _class);
 });
 define('text!app.html', ['module'], function(module) { module.exports = "<template><router-view></router-view></template>"; });
-define('text!modules/home.html', ['module'], function(module) { module.exports = "<template><div class=\"container\">    <h1>${message}</h1>    <compose show.bind=\"showLogin\" view=\"./components/login.html\"></compose>    <compose show.bind=\"!showLogin\" view=\"./components/register.html\"></compose></div></template>"; });
-define('text!resources/css/styles.css', ['module'], function(module) { module.exports = ".leftMargin {\r\n    margin-left: 40px;\r\n    }\r\n\r\n    \r\n    "; });
-define('text!modules/list.html', ['module'], function(module) { module.exports = "<template>    <compose show.bind=\"showList\" view=\"./components/todoList.html\"></compose>    <compose show.bind=\"!showList\" view=\"./components/todoForm.html\"></compose></template>"; });
-define('text!modules/components/login.html', ['module'], function(module) { module.exports = "<template><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\"><body> <div id=\"errorMsg\" innerhtml.bind=\"loginError\"></div><div class=\"w3-container\">    <label for=\"email\"><b>Email</b></label>    <input value.bind=\"email\" type=\"email\" autofocus class=\"form-control\" id=\"email\" placeholder=\"Email\">    <label for=\"password\"><b>Password</b></label>    <input value.bind=\"password\" type=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\"></div><br>    <button click.trigger=\"login()\" class=\"w3-button w3-blue\">Login</button>        <span class=\"registerLink\" click.trigger=\"showRegister()\">Register</span></body></template>"; });
-define('text!modules/components/register.html', ['module'], function(module) { module.exports = "<template>   First Name: <input value.bind=\"user.firstName\">     Last Name: <input value.bind=\"user.lastName\">     Email: <input value.bind=\"user.email\">     Password: <input value.bind=\"user.password\"> <span>${registerError}</span><button click.trigger=\"save()\">Save</button></template>"; });
-define('text!modules/components/todoForm.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"><div class=\"card topMargin\"><div class=\"card-body\"><span><i click.trigger=\"back()\" class=\"fa fa-arrow-left fa-lg\" aria-hidden=\"true\"></i></span><br></div></div><form><div class=\"form-group topMargin\"><label for=\"todoInput\">Todo *</label><input value.bind=\"todoObj.todo\" type=\"text\" class=\"form-control\" id=\"todoInput\" aria-describedby=\"todoHelp\" placeholder=\"Enter ToDo\"> <small id=\"todoHelp\" class=\"form-text text-muted\">A short name for the ToDo.</small><br></div>        <div class=\"form-group\">            <label for=\"descriptionInput\">Description</label>            <textarea value.bind=\"todoObj.description\" type=\"text\" class=\"form-control\" id=\"descriptionInput\" aria-describedby=\"descriptionHelp\" placeholder=\"Enter Description\"></textarea>            <small id=\"descriptionHelp\" class=\"form-text text-muted\">A longer description if required.</small><br>        </div></form></div><div class=\"form-group\">            <label for=\"priorityInput\">Priority</label>            <select value.bind=\"todoObj.priority\" class=\"form-control\" id=\"exampleFormControlSelect2\">                <option repeat.for=\"priority of priorities\" value.bind=\"priority\"> ${priority}</option>            </select>            <small id=\"priorityHelp\" class=\"form-text text-muted\">How urgent is this?</small>         </div>               <div class=\"form-group\">            <label for=\"dueDateInput\">Due Date *</label>            <input type=\"date\" class=\"form-control\" value.bind=\"todoObj.dateDue\">             <small id=\"dueDateHelp\" class=\"form-text text-muted\">The date to ToDo is due.</small>          <br>        <button click.trigger=\"saveTodo()\" class=\"btn btn-primary topMargin\">Save</button>     </div></template>"; });
-define('text!modules/components/todoList.html', ['module'], function(module) { module.exports = "<template><div class=\"“container”\">    <div class=\"card topMargin\">        <div class=\"card-body\">            <div class=\"row\">                <span class=\"col\">                    <span class=\"rightMargin pull-right\"><i click.trigger=\"logout()\" class=\"fa fa-sign-out fa-lg\" aria-hidden=\"true\"></i></span>                     <span class=\"rightMargin pull-right\"><i click.trigger=\"createTodo()\" class=\"fa fa-plus fa-lg\" aria-hidden=\"true\"></i></span>                 </span> </div><div show.bind=\"todos.todosArray.length\"><table class=\"table\"><thead><tr><th>ToDo</th></tr></thead><tbody><tr repeat.for=\"todo of todos.todosArray\"><th>${todo.todo}</th></tr></tbody></table></div><div show.bind=\"!todos.todosArray.length\"><h2>Apparently, you don't have anything to do!</h2></div>                    </div></div>    </div></template>"; });
+define('text!resources/css/styles.css', ['module'], function(module) { module.exports = ".rightMargin {\r\n    margin-right: 10px;\r\n    }\r\n\r\n    .leftMargin {\r\n        margin-left: 10px;\r\n    }\r\n\r\n    \r\n    "; });
+define('text!modules/home.html', ['module'], function(module) { module.exports = "<template><h1>${message}</h1><compose show.bind=\"showLogin\" view=\"./components/login.html\"></compose><compose show.bind=\"!showLogin\" view=\"./components/register.html\"></compose></template>"; });
+define('text!modules/list.html', ['module'], function(module) { module.exports = "<template><compose show.bind=\"showList\" view=\"./components/todoList.html\"></compose><compose show.bind=\"!showList\" view=\"./components/todoForm.html\"></compose></template>"; });
+define('text!modules/components/login.html', ['module'], function(module) { module.exports = "<template><div id=\"errorMsg\" innerhtml.bind=\"loginError\"></div><label for=\"email\">Email</label><input value.bind=\"email\" type=\"email\" autofocus class=\"form-control\" id=\"email\" placeholder=\"Email\"><label for=\"password\">Password</label><input value.bind=\"password\" type=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\"><button click.trigger=\"login()\">Login</button> <span class=\"registerLink\" click.trigger=\"showRegister()\">Register</span></template>"; });
+define('text!modules/components/register.html', ['module'], function(module) { module.exports = "<template>First Name: <input value.bind=\"user.firstName\"> Last Name: <input value.bind=\"user.lastName\"> Email: <input value.bind=\"user.email\"> Password: <input value.bind=\"user.password\"> <span>${registerError}</span><button click.trigger=\"save()\">Save</button></template>"; });
+define('text!modules/components/todoForm.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"><div class=\"card topMargin\"><div class=\"card-body\"><span><i click.trigger=\"back()\" class=\"fa fa-arrow-left fa-lg\" aria-hidden=\"true\"></i></span></div></div><form><div class=\"form-group topMargin\"><label for=\"todoInput\">Todo *</label><input value.bind=\"todoObj.todo\" type=\"text\" class=\"form-control\" id=\"todoInput\" aria-describedby=\"todoHelp\" placeholder=\"Enter ToDo\"> <small id=\"todoHelp\" class=\"form-text text-muted\">A short name for the ToDo.</small></div><div class=\"form-group\"><label for=\"descriptionInput\">Description</label><textarea value.bind=\"todoObj.description\" type=\"text\" class=\"form-control\" id=\"descriptionInput\" aria-describedby=\"descriptionHelp\" placeholder=\"Enter Description\"></textarea><small id=\"descriptionHelp\" class=\"form-text text-muted\">A longer description if required.</small></div><div class=\"form-group\"><label for=\"priorityInput\">Priority</label><select value.bind=\"todoObj.priority\" class=\"form-control\" id=\"exampleFormControlSelect2\"><option repeat.for=\"priority of priorities\" value.bind=\"priority\"> ${priority}</option></select><small id=\"priorityHelp\" class=\"form-text text-muted\">How urgent is this?</small></div><div class=\"form-group\"><label for=\"dueDateInput\">Due Date *</label><input type=\"date\" class=\"form-control\" value.bind=\"todoObj.dateDue\"> <small id=\"dueDateHelp\" class=\"form-text text-muted\">The date to ToDo is due.</small></div><button click.trigger=\"saveTodo()\" class=\"btn btn-primary topMargin\">Save</button></form></div></template>"; });
+define('text!modules/components/todoList.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"></div><div class=\"card topMargin\"><div class=\"card-body\"><div class=\"row\"><span class=\"col\"><span class=\"rightMargin pull-right\"><i click.trigger=\"logout()\" class=\"fa fa-sign-out fa-lg\" aria-hidden=\"true\"></i></span> <span class=\"rightMargin pull-right\"><i click.trigger=\"createTodo()\" class=\"fa fa-plus fa-lg\" aria-hidden=\"true\"></i></span></span></div><div show.bind=\"todos.todosArray.length\"><table class=\"table\"><thead><tr><th>ToDo</th></tr></thead><tbody><tr repeat.for=\"todo of todos.todosArray\"><th>${todo.todo}</th></tr></tbody></table></div><div show.bind=\"!todos.todosArray.length\"><h2>Apparently, you don't have anything to do!</h2></div></div></div></template>"; });
 //# sourceMappingURL=app-bundle.js.map

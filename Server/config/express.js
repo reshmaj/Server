@@ -48,11 +48,6 @@ module.exports = function (app, config) {
 
 
 
-  var users = [ {name: 'John', email: 'woo@hoo.com'},
-                {name: 'Betty', email: 'loo@woo.com'},
-                {name: 'Hal', email: 'boo@woo.com'}
-  ];
-
 app.get ('/api/users', function(req, res){
 res.status(200).json(users);
 });

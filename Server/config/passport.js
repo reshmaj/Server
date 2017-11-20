@@ -9,23 +9,23 @@ localStrategy = require('passport-local');
 var localOptions = { usernameField: 'email' };
 
 var localLogin = new localStrategy(localOptions, function(email, password, next){
-	User.findOne({email: email}).exec()
-	.then(function(user){ 
-	     if(!user){
-	        return next({status: "404", message: "Email not found."});
-	      } else {
-	        user.comparePassword(password, function (err, isMatch) {
-	          if (err) {
-		              return next(err);
-	          } else if(!isMatch){
-	  			return next({status: 401, message: 'Invalid username or password'});
-	          } else {
-		            return next(null, user);
-	          }
-	        });
-	      }
-	   })
-	.catch(function(err){return next(err);});
+  User.findOne({email: email}).exec()
+  .then(function(user){ 
+       if(!user){
+          return next({status: "404", message: "Email not found."});
+        } else {
+          user.comparePassword(password, function (err, isMatch) {
+            if (err) {
+                return next(err);
+            } else if(!isMatch){
+          return next({status: 401, message: 'Invalid username or password'});
+            } else {
+                return next(null, user);
+            }
+          });
+        }
+     })
+  .catch(function(err){return next(err);});
   });
 
   generateToken = function(user){
@@ -48,12 +48,14 @@ setUserInfo = function(req){
     var userInfo = setUserInfo(req.user);
     res.status(200).json({ token: generateToken(userInfo), user: req.user  });
   };
+
   var jwtOptions = {
     jwtFromRequest: extractJwt. fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.secret
-     };
+    secretOrKey: config.secret 
+  };
   
   var jwtLogin = new jwtStrategy(jwtOptions, function(payload, next){
+    console.log(payload);
     User.findById(payload._id).exec()
     .then(function(user){
       if (user){
@@ -65,6 +67,5 @@ setUserInfo = function(req){
     .catch(function(err){ return next(err);});
   });
   
-passport.use(jwtLogin);
-passport.use(localLogin);
-
+  passport.use(jwtLogin);
+  passport.use(localLogin);

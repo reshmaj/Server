@@ -1,17 +1,12 @@
 <template>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <body>
-        <div id="errorMsg" innerhtml.bind="loginError"></div>
-       <div class="w3-container" >
-            <label for="email"><b>Email</b></label>
-            <input value.bind="email" type="email" autofocus class="form-control" id="email" placeholder="Email"></input>
-            <label for="password"><b>Password</b></label>
-            <input value.bind="password" type="password" class="form-control" id="password" placeholder="Password"></input>
-           </div><br>
-            <button click.trigger="login()" class="w3-button w3-blue">Login</button>  
-           <span class="registerLink" click.trigger="showRegister()">Register</span>
-       
-    </body>
-    </template>
+    <div id="errorMsg" innerhtml.bind="loginError"></div> 
+    <label for="email">Email</label>
+    <input value.bind="email" type="email" autofocus class="form-control"  id="email" placeholder="Email"></input>
+    <label for="password">Password</label>
+    <input value.bind="password" type="password" class="form-control" id="password" placeholder="Password"></input>
+    
+    <button click.trigger="login()">Login</button>  
+    <span class="registerLink" click.trigger="showRegister()">Register</span>
+</template>
+
     
