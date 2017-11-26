@@ -1,11 +1,18 @@
 <template>
-    <div class="container"></div>
+    <div class="container">
             <div class="card topMargin">
                 <div class="card-body">
                     <div class="row">
-                        <span class="col">
+                         <span class="col">
+                            <div class="form-check">
+                            <label class="form-check-label">
+                            <input change.trigger="toggleShowCompleted()" type="checkbox" class="form-check-input"> Show completed
+                            </label>
+                            </div>
+                            </span>
+                             <span class="col">
                             <span class="rightMargin pull-right">
-                            <i click.trigger="logout()"     class="fa fa-sign-out fa-lg" aria-hidden="true"></i></span>
+                            <i click.trigger="logout()" class="fa fa-sign-out fa-lg" aria-hidden="true"></i></span>
                             <span class=" rightMargin pull-right">
                             <i click.trigger="createTodo()" class="fa fa-plus fa-lg" aria-hidden="true"></i></span>
                         </span>
@@ -15,20 +22,33 @@
                         <thead>
                             <tr>
                                 <th>ToDo</th>
+                                <th>Due Date</th>
+                                 <th>Priority</th>
+                                <th>File</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr repeat.for = "todo of todos.todosArray">
-                                <th>${todo.todo}</th>
-                            </tr>
+                                <tr class="${todo.priority === 'Critical' ? 'table-primary' : ' '}" repeat.for = "todo of todos.todosArray"|completed:showCompleted>
+                                        <td>${todo.todo}</td>
+                                        <td>${todo.dateDue | dateFormat}</td>
+                                        <td>${todo.priority}</td>
+                                        <td><a href="http://localhost:5000/uploads/${user._id}/${todo.file.filename}" 	target="_blank">${todo.file.originalName}</a></td>
+                                        <td>
+                                        <i click.trigger="editTodo(todo)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
+                                        <i click.trigger="deleteTodo(todo)" class="fa fa-trash rightMargin" aria-hidden="true"></i>
+                                        <i show.bind="!todo.completed" click.trigger="completeTodo(todo)" class="fa fa-square-o" aria-hidden="true"></i>
+                                        <i show.bind="todo.completed " click.trigger="completeTodo(todo)" class="fa fa-check " aria-hidden="true "></i>
+                                        </td>
+                                         
+                                </tr>
                         </tbody>
-                    </table>
+            </table>
             </div>
-            <div show.bind="!todos.todosArray.length">
-                <h2>Apparently, you don't have anything to do!</h2>
-            </div>
-        
+                    <div show.bind="!todos.todosArray.length">
+                        <h2>Apparently, you don't have anything to do!</h2>
+                    </div>
                 </div>
             </div>
-    </div>
+        </div>
         </template>

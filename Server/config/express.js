@@ -8,6 +8,7 @@ var glob = require('glob');
 var cors = require('cors');
 
 
+
 module.exports = function (app, config) {
   app.use(cors({origin: 'http://localhost:9000'}));
       logger.log("Loading Mongoose functionality");
@@ -31,10 +32,9 @@ module.exports = function (app, config) {
       next();
     });  
   }
-  app.use(bodyparser.json());
-  app.use(bodyparser.urlencoded({
-  extended: true
-  }));
+  app.use(bodyparser.json({limit: '1000mb'}));
+  app.use(bodyparser.urlencoded({limit: '1000mb', extended: true}));
+  
   //require ('../app/controllers/users')(app, config)
           var models = glob.sync(config.root + '/app/models/*.js');
           models.forEach(function (model) {

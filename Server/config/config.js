@@ -8,7 +8,10 @@ var config = {
         app: { name: 'ToDos'},
         port: 5000,
         db: 'mongodb://127.0.0.1/todo-dev',
+        uploads: rootPath + "/public/uploads/",
         secret: "cayennedlikedhistreats"
+        
+        
         
    },
     
@@ -17,6 +20,7 @@ var config = {
         app: { name: 'ToDos' },
         port: 4000,
         db: 'mongodb://127.0.0.1/todo-test',
+        uploads: rootPath + "/public/uploads/",
         secret: "cayennedlikedhistreats"
         
         
@@ -27,6 +31,7 @@ var config = {
         app: { name: 'ToDos'},
         port: 80,
         db: 'mongodb://127.0.0.1/todo',
+        uploads: rootPath + "/public/uploads/",
         secret: "cayennedlikedhistreats"
         
      }
