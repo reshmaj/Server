@@ -103,6 +103,17 @@ define('main',['exports', './environment', 'regenerator-runtime', './auth-config
     });
   }
 });
+define('resources/index',['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.configure = configure;
+  function configure(config) {
+    config.globalResources(['./value-converters/date-format', './value-converters/completed', './elements/flatpickr']);
+  }
+});
 define('modules/home',['exports', 'aurelia-framework', 'aurelia-router', '../resources/data/users', 'aurelia-auth'], function (exports, _aureliaFramework, _aureliaRouter, _users, _aureliaAuth) {
   'use strict';
 
@@ -404,7 +415,7 @@ define('modules/list',['exports', 'aurelia-framework', '../resources/data/todos'
         };
 
         List.prototype.back = function back() {
-            this.showlist = true;
+            this.showList = true;
         };
 
         List.prototype.logout = function logout() {
@@ -414,17 +425,6 @@ define('modules/list',['exports', 'aurelia-framework', '../resources/data/todos'
 
         return List;
     }()) || _class);
-});
-define('resources/index',['exports'], function (exports) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.configure = configure;
-  function configure(config) {
-    config.globalResources(['./value-converters/date-format', './value-converters/completed']);
-  }
 });
 define('resources/data/data-services',['exports', 'aurelia-framework', 'aurelia-fetch-client'], function (exports, _aureliaFramework, _aureliaFetchClient) {
     'use strict';
@@ -841,6 +841,117 @@ define('resources/data/users',['exports', 'aurelia-framework', './data-services'
         return Users;
     }()) || _class);
 });
+define('resources/elements/flatpickr',['exports', 'aurelia-framework', 'flatpickr'], function (exports, _aureliaFramework, _flatpickr) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.FlatPickerCustomElement = undefined;
+
+    var _flatpickr2 = _interopRequireDefault(_flatpickr);
+
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {
+            default: obj
+        };
+    }
+
+    function _initDefineProp(target, property, descriptor, context) {
+        if (!descriptor) return;
+        Object.defineProperty(target, property, {
+            enumerable: descriptor.enumerable,
+            configurable: descriptor.configurable,
+            writable: descriptor.writable,
+            value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+        });
+    }
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
+    function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+        var desc = {};
+        Object['ke' + 'ys'](descriptor).forEach(function (key) {
+            desc[key] = descriptor[key];
+        });
+        desc.enumerable = !!desc.enumerable;
+        desc.configurable = !!desc.configurable;
+
+        if ('value' in desc || desc.initializer) {
+            desc.writable = true;
+        }
+
+        desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+            return decorator(target, property, desc) || desc;
+        }, desc);
+
+        if (context && desc.initializer !== void 0) {
+            desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+            desc.initializer = undefined;
+        }
+
+        if (desc.initializer === void 0) {
+            Object['define' + 'Property'](target, property, desc);
+            desc = null;
+        }
+
+        return desc;
+    }
+
+    function _initializerWarningHelper(descriptor, context) {
+        throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+    }
+
+    var _dec, _dec2, _class, _desc, _value, _class2, _descriptor;
+
+    var FlatPickerCustomElement = exports.FlatPickerCustomElement = (_dec = (0, _aureliaFramework.inject)(Element), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+        function FlatPickerCustomElement(element) {
+            _classCallCheck(this, FlatPickerCustomElement);
+
+            _initDefineProp(this, 'value', _descriptor, this);
+
+            this.element = element;
+        }
+
+        FlatPickerCustomElement.prototype.bind = function bind() {
+            var defaultConfig = {
+                altInput: true,
+                altFormat: "F j, Y",
+                wrap: true
+            };
+            this._config = Object.assign({}, defaultConfig);
+            this._config.onChange = this._config.onMonthChange = this._config.onYearChange = this.onChange.bind(this);
+        };
+
+        FlatPickerCustomElement.prototype.attached = function attached() {
+            this.flatpickr = new _flatpickr2.default(this.element.querySelector('.aurelia-flatpickr'), this._config);
+        };
+
+        FlatPickerCustomElement.prototype.onChange = function onChange(selectedDates, dateStr, instance) {
+            this.value = selectedDates[0];
+        };
+
+        FlatPickerCustomElement.prototype.valueChanged = function valueChanged() {
+            if (!this.flatpickr) {
+                return;
+            }
+            if (this.value === this.flatpickr.selectedDates[0]) {
+                return;
+            }
+            var newDate = this.value ? this.value : undefined;
+            this.flatpickr.setDate(newDate);
+        };
+
+        return FlatPickerCustomElement;
+    }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec2], {
+        enumerable: true,
+        initializer: null
+    })), _class2)) || _class);
+});
 define('resources/value-converters/completed',["exports"], function (exports) {
     "use strict";
 
@@ -918,6 +1029,7 @@ define('text!modules/home.html', ['module'], function(module) { module.exports =
 define('text!modules/list.html', ['module'], function(module) { module.exports = "<template><compose show.bind=\"showList\" view=\"./components/todoList.html\"></compose><compose show.bind=\"!showList\" view=\"./components/todoForm.html\"></compose></template>"; });
 define('text!modules/components/login.html', ['module'], function(module) { module.exports = "<template><div class=\"col-md-3\"><form id=\"form\"><div id=\"errorMsg\" innerhtml.bind=\"loginError\"></div><div class=\"form-group\"><label for=\"email\">Email</label><input value.bind=\"email\" type=\"email\" autofocus class=\"form-control\" id=\"email\" placeholder=\"Email\"></div><div class=\"form-group\"><label for=\"password\">Password</label><input value.bind=\"password\" type=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\"></div><button class=\"btn btn-primary\" click.trigger=\"login()\">Login</button> <a href=\"\" class=\"text-muted\" click.trigger=\"showRegister()\">Register</a></form></div></template>"; });
 define('text!modules/components/register.html', ['module'], function(module) { module.exports = "<template><form class=\"col-lg-6 col-lg-offset-3\" id=\"RegistrationForm\"><div innerhtml.bind=\"registerError\"></div><div class=\"form-group\"><label for=\"InputFirstName\">First Name</label><input type=\"text\" class=\"form-control\" id=\"InputFirstName\" aria-describedby=\"firstNameHelp\" placeholder=\"Enter first name\" value.bind=\"user.firstName\"></div><div class=\"form-group\"><label for=\"InputLastName\">Last Name</label><input type=\"text\" class=\"form-control\" id=\"InputLastName\" aria-describedby=\"lastNameHelp\" placeholder=\"Enter last name\" value.bind=\"user.lastName\"></div><div class=\"form-group\"><label for=\"InputEmail\">Email</label><input type=\"email\" class=\"form-control\" id=\"InputEmail\" aria-describedby=\"emailHelp\" placeholder=\"Enter email\" value.bind=\"user.email\"></div><div class=\"form-group\"><label for=\"InputPassword\">Password</label><input type=\"text\" class=\"form-control\" id=\"InputPassword\" aria-describedby=\"passwordHelp\" placeholder=\"Enter password\" value.bind=\"user.password\"></div><button click.delegate=\"save()\" class=\"btn btn-primary\">Save</button></form></template>"; });
-define('text!modules/components/todoForm.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"><div class=\"card topMargin\"><div class=\"card-body\"><span><i click.trigger=\"back()\" class=\"fa fa-arrow-left fa-lg\" aria-hidden=\"true\"></i></span></div></div><form><div class=\"form-group topMargin\"><label for=\"todoInput\">Todo*</label><input value.bind=\"todoObj.todo\" type=\"text\" class=\"form-control\" id=\"todoInput\" aria-describedby=\"todoHelp\" placeholder=\"Enter ToDo\"> <small id=\"todoHelp\" class=\"form-text text-muted\">A short name for the ToDo.</small></div><div class=\"form-group\"><label for=\"descriptionInput\">Description</label><textarea value.bind=\"todoObj.description\" type=\"text\" class=\"form-control\" id=\"descriptionInput\" aria-describedby=\"descriptionHelp\" placeholder=\"Enter Description\"></textarea><small id=\"descriptionHelp\" class=\"form-text text-muted\">A longer description if required.</small></div><div class=\"form-group\"><label for=\"priorityInput\">Priority</label><select value.bind=\"todoObj.priority\" class=\"form-control\" id=\"exampleFormControlSelect2\"><option repeat.for=\"priority of priorities\" value.bind=\"priority\"> ${priority}</option></select><small id=\"priorityHelp\" class=\"form-text text-muted\">How urgent is this?</small></div><div class=\"form-group\"><label for=\"dueDateInput\">Due Date*</label><input type=\"date\" class=\"form-control\" value.bind=\"todoObj.dateDue\"> <small id=\"dueDateHelp\" class=\"form-text text-muted\">The date to ToDo is due.</small></div><div class=\"row\"><div class=\"col\"><label class=\"btn btn-primary\">Browse for files &hellip; <input type=\"file\" style=\"display:none\" change.delegate=\"changeFiles()\" files.bind=\"files\"></label><small id=\"fileHelp\" class=\"form-text text-muted\">Upload any files that will be useful.</small></div><br><div class=\"col-8\"><ul><li repeat.for=\"file of filesToUpload\" class=\"list-group-item\"> ${file.name}<span click.delegate=\"removeFile($index)\" class=\"pull-right\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></span></li></ul></div></div><button click.trigger=\"saveTodo()\" class=\"btn btn-primary topMargin\">Save</button></form></div></template>"; });
-define('text!modules/components/todoList.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"><div class=\"card topMargin\"><div class=\"card-body\"><div class=\"row\"> <span class=\"col\"><div class=\"form-check\"><label class=\"form-check-label\"><input change.trigger=\"toggleShowCompleted()\" type=\"checkbox\" class=\"form-check-input\"> Show completed</label></div></span><span class=\"col\"><span class=\"rightMargin pull-right\"><i click.trigger=\"logout()\" class=\"fa fa-sign-out fa-lg\" aria-hidden=\"true\"></i></span> <span class=\"rightMargin pull-right\"><i click.trigger=\"createTodo()\" class=\"fa fa-plus fa-lg\" aria-hidden=\"true\"></i></span></span></div><div show.bind=\"todos.todosArray.length\"><table class=\"table\"><thead><tr><th>ToDo</th><th>Due Date</th> <th>Priority</th><th>File</th><th>Edit</th></tr></thead><tbody><tr class=\"${todo.priority === 'Critical' ? 'table-primary' : ' '}\" repeat.for=\"todo of todos.todosArray\" |completed:showcompleted><td>${todo.todo}</td><td>${todo.dateDue | dateFormat}</td><td>${todo.priority}</td><td><a href=\"http://localhost:5000/uploads/${user._id}/${todo.file.filename}\" target=\"_blank\">${todo.file.originalName}</a></td><td><i click.trigger=\"editTodo(todo)\" class=\"fa fa-pencil rightMargin\" aria-hidden=\"true\"></i> <i click.trigger=\"deleteTodo(todo)\" class=\"fa fa-trash rightMargin\" aria-hidden=\"true\"></i>   <i show.bind=\"!todo.completed\" click.trigger=\"completeTodo(todo)\" class=\"fa fa-square-o\" aria-hidden=\"true\"></i>   <i show.bind=\"todo.completed \" click.trigger=\"completeTodo(todo)\" class=\"fa fa-check\" aria-hidden=\"true \"></i></td></tr></tbody></table></div><div show.bind=\"!todos.todosArray.length\"><h2>Apparently, you don't have anything to do!</h2></div></div></div></div></template>"; });
+define('text!modules/components/todoForm.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"><div class=\"card topMargin\"><div class=\"card-body\"><span><i click.trigger=\"back()\" class=\"fa fa-arrow-left fa-lg\" aria-hidden=\"true\"></i></span></div></div><form><div class=\"form-group topMargin\"><label for=\"todoInput\">Todo*</label><input value.bind=\"todoObj.todo\" type=\"text\" class=\"form-control\" id=\"todoInput\" aria-describedby=\"todoHelp\" placeholder=\"Enter ToDo\"> <small id=\"todoHelp\" class=\"form-text text-muted\">A short name for the ToDo.</small></div><div class=\"form-group\"><label for=\"descriptionInput\">Description</label><textarea value.bind=\"todoObj.description\" type=\"text\" class=\"form-control\" id=\"descriptionInput\" aria-describedby=\"descriptionHelp\" placeholder=\"Enter Description\"></textarea><small id=\"descriptionHelp\" class=\"form-text text-muted\">A longer description if required.</small></div><div class=\"form-group\"><label for=\"priorityInput\">Priority</label><select value.bind=\"todoObj.priority\" class=\"form-control\" id=\"exampleFormControlSelect2\"><option repeat.for=\"priority of priorities\" value.bind=\"priority\"> ${priority}</option></select><small id=\"priorityHelp\" class=\"form-text text-muted\">How urgent is this?</small></div><div class=\"form-group\"><label for=\"dueDateInput\">Due Date*</label><flat-picker value.bind=\"todoObj.dateDue\"></flat-picker><small id=\"dueDateHelp\" class=\"form-text text-muted\">The date to ToDo is due.</small></div><div class=\"row\"><div class=\"col\"><label class=\"btn btn-primary\">Browse for files &hellip; <input type=\"file\" style=\"display:none\" change.delegate=\"changeFiles()\" files.bind=\"files\"></label><small id=\"fileHelp\" class=\"form-text text-muted\">Upload any files that will be useful.</small></div><br><div class=\"col-8\"><ul><li repeat.for=\"file of filesToUpload\" class=\"list-group-item\"> ${file.name}<span click.delegate=\"removeFile($index)\" class=\"pull-right\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></span></li></ul></div></div><button click.trigger=\"saveTodo()\" class=\"btn btn-primary topMargin\">Save</button></form></div></template>"; });
+define('text!modules/components/todoList.html', ['module'], function(module) { module.exports = "<template><div class=\"container\"><div class=\"card topMargin\"><div class=\"card-body\"><div class=\"row\"> <span class=\"col\"><div class=\"form-check\"><label class=\"form-check-label\"><input change.trigger=\"toggleShowCompleted()\" type=\"checkbox\" class=\"form-check-input\"> Show completed</label></div></span><span class=\"col\"><span class=\"rightMargin pull-right\"><i click.trigger=\"logout()\" class=\"fa fa-sign-out fa-lg\" aria-hidden=\"true\"></i></span> <span class=\"rightMargin pull-right\"><i click.trigger=\"createTodo()\" class=\"fa fa-plus fa-lg\" aria-hidden=\"true\"></i></span></span></div><div show.bind=\"todos.todosArray.length\"><table class=\"table\"><thead><tr><th>ToDo</th><th>Due Date</th> <th>Priority</th><th>File</th><th>Edit</th></tr></thead><tbody><tr class=\"${todo.priority === 'Critical' ? 'table-primary' : ' '}\" repeat.for=\"todo of todos.todosArray|completed:showCompleted\"><td>${todo.todo}</td><td>${todo.dateDue | dateFormat}</td><td>${todo.priority}</td><td><a href=\"http://localhost:5000/uploads/${user._id}/${todo.file.filename}\" target=\"_blank\">${todo.file.originalName}</a></td><td><i click.trigger=\"editTodo(todo)\" class=\"fa fa-pencil rightMargin\" aria-hidden=\"true\"></i> <i click.trigger=\"deleteTodo(todo)\" class=\"fa fa-trash rightMargin\" aria-hidden=\"true\"></i>   <i show.bind=\"!todo.completed\" click.trigger=\"completeTodo(todo)\" class=\"fa fa-square-o\" aria-hidden=\"true\"></i>   <i show.bind=\"todo.completed \" click.trigger=\"completeTodo(todo)\" class=\"fa fa-check\" aria-hidden=\"true \"></i></td></tr></tbody></table></div><div show.bind=\"!todos.todosArray.length\"><h2>Apparently, you don't have anything to do!</h2></div></div></div></div></template>"; });
+define('text!resources/elements/flatpickr.html', ['module'], function(module) { module.exports = "<template>    <require from=\"flatpickr/flatpickr.css\"></require>    <div class=\"input-group aurelia-flatpickr\">        <input type=\"text\" class=\"aurelia-flatpickr form-control flatPicker\" data-input>     </div></template>"; });
 //# sourceMappingURL=app-bundle.js.map

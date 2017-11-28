@@ -29,10 +29,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                                <tr class="${todo.priority === 'Critical' ? 'table-primary' : ' '}" repeat.for = "todo of todos.todosArray"|completed:showCompleted>
+                                <tr class="${todo.priority === 'Critical' ? 'table-primary' : ' '}" repeat.for = "todo of todos.todosArray|completed:showCompleted">
                                         <td>${todo.todo}</td>
                                         <td>${todo.dateDue | dateFormat}</td>
                                         <td>${todo.priority}</td>
+                                        <!-- <td><a href="uploads/${user._id}/${todo.file.filename}" target="_blank">${todo.file.originalName}</a></td> -->
                                         <td><a href="http://localhost:5000/uploads/${user._id}/${todo.file.filename}" 	target="_blank">${todo.file.originalName}</a></td>
                                         <td>
                                         <i click.trigger="editTodo(todo)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>

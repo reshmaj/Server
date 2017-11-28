@@ -76,7 +76,7 @@ export class List {
             }
                         
     back(){
-        this.showlist=true;
+        this.showList=true;
     }
 
   logout(){
