@@ -1,0 +1,22 @@
+.rightMargin {
+    margin-right: 10px;
+    }
+
+    .leftMargin {
+        margin-left: 10px;
+    }
+
+    .border {
+        background-color: rgb(255, 255, 255);
+        width: 300px;
+        border: 1px solid rgb(0, 183, 255);
+        padding: 25px;
+        /* margin: 25px; */
+    }
+
+    h2{
+        text-align: center;
+    }
+ 
+    
+    

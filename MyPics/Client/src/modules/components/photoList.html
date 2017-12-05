@@ -1,0 +1,39 @@
+<template>
+        <div class="container">
+            <div class="card topMargin">
+                <div class="card-body">
+                    <div class="row">
+                        <span class="col">
+                            <span class="rightMargin pull-right"><i click.trigger="logout()" 	class="fa fa-sign-out fa-lg" aria-hidden="true"></i></span>
+                           <span class="rightMargin pull-right"><i click.trigger="createPhotos()" 	class="fa fa-plus fa-lg" aria-hidden="true"></i></span>
+                        </span>
+                    </div>
+        <div show.bind="mypics.mypicsArray.length">
+                <table class="table-striped">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Edit</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for = "mypic of mypics.mypicsArray">
+                                <td><a href="http://localhost:5000/uploads/${user._id}/${mypic.file.fileName}" 	target="_blank">${mypic.file.originalName}</a></td>
+                            <td>
+                            <i click.trigger="editPhotos(mypic)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
+                            <i click.trigger="deletePhotos(mypic)"class="fa fa-trash rightMargin" aria-hidden="true"></i>
+                            </td>
+                                        
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div show.bind="!mypics.mypicsArray.length">
+                <h2>Apparently, you don't have anything to do!</h2>
+            </div>
+        
+                </div>
+        </div>
+            </div>
+        </template>

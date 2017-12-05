@@ -1,0 +1,45 @@
+<template>
+        <h2 style="text-align:center">My Gallery List</h2>
+        <div class="container">
+            <div class="card topMargin">
+                <div class="card-body">
+                    <div class="row">
+                            <span class="col">
+                            <span class="rightMargin pull-right"><i click.trigger="logout()" 	class="fa fa-sign-out fa-lg" aria-hidden="true"></i></span>
+                            <span class="rightMargin pull-right"><i click.trigger="createMypic()" 	class="fa fa-plus fa-lg" aria-hidden="true"></i></span>
+                        </span>
+                    </div>
+        <div show.bind="mypics.mypicsArray.length">
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Gallery</th>
+                                <th>Date Created</th>
+                                <th>Description</th>
+                                <th>Edit</th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for = "mypic of mypics.mypicsArray">
+                                <!-- <td click.trigger="showPhotos(mypic)">${mypic.mypic}</td> -->
+                                <td>${mypic.mypic}</td>
+                                <td>${mypic.dateCreated | dateFormat}</td>
+                                <td>${mypic.description}</td>
+                                <td>
+                            <i click.trigger="editMypic(mypic)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
+                            <i click.trigger="deleteMypic(mypic)"class="fa fa-trash rightMargin" aria-hidden="true"></i>
+                          
+                        </td>
+                                        
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div show.bind="!mypics.mypicsArray.length">
+                <h2>Apparently, you don't have anything to do!</h2>
+            </div>
+        
+                </div>
+        </div>
+            </div>
+        </template>

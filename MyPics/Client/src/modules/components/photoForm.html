@@ -1,0 +1,32 @@
+<template>
+        <div class ="container">
+            <div class="card topMargin">
+                <div class="card-body">
+                    <span><i click.trigger="backPhotos()" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></span>
+                </div>
+            </div>  
+            <form>
+                    <div class="row">
+                    <div class="col">
+                        <label class="btn btn-primary">
+                            Browse for Photos <input type="file" 
+                            style="display: none;" 
+                            change.delegate="changeFiles()" files.bind="files">
+                            </label>
+                            <small id="fileHelp" class="form-text text-muted">
+                            Upload photos in the gallery.</small>
+                            </div>	
+                            <br>
+                                    <div class="col-8">
+                                        <ul>
+                                            <li repeat.for="file of filesToUpload" class="list-group-item">
+                                                ${file.name}<span click.delegate="removeFile($index)" 
+                                                class="pull-right"><i class="fa fa-trash" aria-hidden="true">
+                                                </i></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button click.trigger="savePhotos()" class="btn btn-primary topMargin">Save</button>
+                            </form>
+                    </div>
+                    </template>
