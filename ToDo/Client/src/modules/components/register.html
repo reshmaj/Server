@@ -1,32 +1,32 @@
 <template>
-    
-        <h2 style="color: blue;"><b>Registration</b></h2> 
+    <br>
+        <h3 style="background-color:#6698FF;margin-left: 10px;"><b>Registration</b></h3> 
           <form class="col-lg-4 col-lg-offset-4" id="RegistrationForm">
             <div innerhtml.bind="registerError"></div>
           
             <div class="form-group">
-                <label for="InputFirstName">First Name</label>
+                <label for="InputFirstName"><b>First Name:</b></label>
                 <input type="text" class="form-control" id="InputFirstName" 
             aria-describedby="firstNameHelp" placeholder="Enter first name"
                     value.bind="user.firstName">
             </div>
     
             <div class="form-group">
-                <label for="InputLastName">Last Name</label>
+                <label for="InputLastName"><b>Last Name:</b></label>
                 <input type="text" class="form-control" id="InputLastName" aria-describedby="lastNameHelp" placeholder="Enter last name"
                     value.bind="user.lastName">
             </div>
     
           <div class="form-group">
-                <label for="InputEmail">Email</label>
+                <label for="InputEmail"><b>Email:</b></label>
                 <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email"
                     value.bind="user.email">
             </div>
     
             <div class="form-group">
-                <label for="InputPassword">Password</label>
-                <input type="text" class="form-control" id="InputPassword" aria-describedby="passwordHelp" placeholder="Enter password"
-                    value.bind="user.password">
+                    <label for="password"><b>Password:</b></label>
+                    <input value.bind="user.password" type="password" class="form-control" id="password" placeholder="Enter Password"></input>
+                  </div>
             </div>
     
         

@@ -1,22 +1,25 @@
 <template>
-    <h2 style="color: blue;"><b>ToDo</b></h2>    
-    <div class ="container">
-        <div class="card topMargin">
+        
+    <h2 style="color: black; text-align:center; background-color:#6698FF;"><b>ToDo</b></h2>   
+     <div class ="container">
+            <span><i click.trigger="back()" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></span>
+        <!-- <div class="card topMargin">
             <div class="card-body">
                 <span><i click.trigger="back()" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></span>
+            <img height="80px" width="100px" src="../src/resources/img/todo.png" />
             </div>
-        </div>  
-        <img height="100px" width="150px" src="../src/resources/img/todo.png" />
+        </div>   -->
+        
         <form>
             <div class="form-group topMargin">
-                  <label for="todoInput">Todo*</label>
+                  <label for="todoInput"><b>Todo*:</b></label>
                   <input value.bind="todoObj.todo" type="text" class="form-control" id="todoInput" aria-describedby="todoHelp" 
                     placeholder="Enter ToDo">
                   <small id="todoHelp" class="form-text text-muted">
                     A short name for the ToDo.</small>
             </div>
             <div class="form-group">
-                <label for="descriptionInput">Description</label>
+                <label for="descriptionInput"><b>Description:</b></label>
                 <textarea value.bind="todoObj.description" type="text" class="form-control" 
                 id="descriptionInput" aria-describedby="descriptionHelp" 
                 placeholder="Enter Description"></textarea>
@@ -25,7 +28,7 @@
             </div>
     
     <div class="form-group">
-                        <label for="priorityInput">Priority</label>
+                        <label for="priorityInput"><b>Priority:</b></label>
                         <select value.bind="todoObj.priority" class="form-control" 
                     id="exampleFormControlSelect2">
                             <option repeat.for="priority of priorities" value.bind="priority">
@@ -34,21 +37,20 @@
                         <small id="priorityHelp" class="form-text text-muted">How urgent is this?</small>
                     </div>      
                     <div class="form-group">
-                        <label for="dueDateInput">Due Date*</label>
+                        <label for="dueDateInput"><b>Due Date*:</b></label>
                         <flat-picker value.bind="todoObj.dateDue"></flat-picker> 
-                        <small id="dueDateHelp" class="form-text text-muted">
-                            The date to ToDo is due.</small>
+                        <small id="dueDateHelp" class="form-text text-muted">The date to ToDo is due.</small>
                             </div>  
             <div class="row">
-                <div class="col">
-                    <label class="btn btn-primary">
-                        Browse for files <input type="file" 
-                        style="display: none;" 
-                        change.delegate="changeFiles()" files.bind="files">
-                        </label>
-                        <small id="fileHelp" class="form-text text-muted">
-                        Upload any files that will be useful.</small>
+                    <div class="col">
+                            <label class="btn btn-primary">
+                                    Browse for files&hellip; <input type="file" 
+                                    style="display: none;" 
+                                    change.delegate="changeFiles()" files.bind="files">
+                            </label>
+                            <small id="fileHelp" class="form-text text-muted">Upload any files that will be useful.</small>
                         </div>	
+            
                         <br>
                                 <div class="col-8">
                                     <ul>
@@ -59,6 +61,7 @@
                                     </ul>
                                 </div>
                             </div>
+                            <br>
                             <button click.trigger="saveTodo()" class="btn btn-primary topMargin">Save</button>
                         </form>
                 </div>
