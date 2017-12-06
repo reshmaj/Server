@@ -21,8 +21,8 @@
                         </thead>
                         <tbody>
                             <tr repeat.for = "mypic of mypics.mypicsArray">
-                                <!-- <td click.trigger="showPhotos(mypic)">${mypic.mypic}</td> -->
-                                <td>${mypic.mypic}</td>
+                                <td click.trigger="showPhotos(mypic)">${mypic.mypic}</td>
+                                <!-- <td>${mypic.mypic}</td> -->
                                 <td>${mypic.dateCreated | dateFormat}</td>
                                 <td>${mypic.description}</td>
                                 <td>

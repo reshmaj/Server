@@ -66,7 +66,7 @@ module.exports = function (app, config) {
     router.get('/Galleries/:mygalleryId', /*requireAuth,*/ function (req, res, next){
         logger.log('Get user'+ req.params.mygalleryId, 'verbose');
 
-        Mygallery.findById(req.params.mygalleryId)
+        Mygallery.find({Id:req.params.mygalleryId})
                    .then(Mygallery => {
                        if(Mygallery){
                            res.status(200).json(Mygallery);

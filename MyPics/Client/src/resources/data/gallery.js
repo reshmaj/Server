@@ -5,11 +5,18 @@ import { DataServices } from './data-services';
 export class Mygallery {
     constructor(data) {
         this.data = data;
-        this.MYGALLERY_SERVICE = 'galleries';
+        this.MYGALLERY_SERVICE = 'Galleries';
         this.mygalleryArray = [];
 
     }
 
+    async getPhotos(id){
+        let response = await this.data.get(this.MYGALLERY_SERVICE + "/" + id);
+        if (!response.error && !response.message) {
+            this.mygalleryArray = response;
+        }
+            }
+            
     async getUserMygallery(id) {
         let response = await this.data.get(this.MYGALLERY_SERVICE + "/user/" + id);
         if (!response.error && !response.message) {
@@ -22,7 +29,7 @@ export class Mygallery {
             if (!mygallery._id) {
                 let serverResponse = await this.data.post(mygallery, this.MYGALLERY_SERVICE);
                 if (!serverResponse.error) {
-                    this.mypicsArray.push(serverResponse);
+                    this.mygalleryArray.push(serverResponse);
                 }
                 return serverResponse;
              } else {
