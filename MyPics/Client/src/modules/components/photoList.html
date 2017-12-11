@@ -1,28 +1,32 @@
 <template>
+        <h3 style="text-align: center;"><b>My Photo Gallery!!</b></h3> 
         <div class="container">
             <div class="card topMargin">
-                <div class="card-body">
                     <div class="row">
-                        <span class="col">
-                            <span class="rightMargin pull-right"><i click.trigger="logout()" 	class="fa fa-sign-out fa-lg" aria-hidden="true"></i></span>
-                           <span class="rightMargin pull-right"><i click.trigger="createPhotos()" 	class="fa fa-plus fa-lg" aria-hidden="true"></i></span>
-                        </span>
+                    <span class="col">
+                            <!-- <span><i click.trigger="backPhotos()" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></span> -->
+                            <span class="rightMargin pull-right"><button type="button" class="btn btn-primary btn-md"  click.trigger="logout()">Logout</button></span>
+                            <span class="rightMargin pull-left"><button type="button" class="btn btn-primary btn-md"  click.trigger="createPhotos()">Add a Picture</button></span>
+    </span>
                     </div>
         <div show.bind="mygalleries.mygalleryArray.length">
-                <table class="table-striped">
+                <table class="table-responsive">
                         <thead>
                             <tr>
                                 <th>Photo</th>
-                                <th>Edit</th>
+                                <!-- <th>Edit</th> -->
                                 
                             </tr>
                         </thead>
                         <tbody>
                             <tr repeat.for = "mygallery of mygalleries.mygalleryArray">
-                                <td><a href="http://localhost:5000/uploads/${user._id}/${mygallery.file.fileName}" 	target="_blank">${mygallery.file.originalName}</a></td>
-                            <td>
-                            <i click.trigger="editPhotos(mygallery)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
-                            <i click.trigger="deletePhotos(mygallery)"class="fa fa-trash rightMargin" aria-hidden="true"></i>
+                                    <td><a href="http://localhost:5000/uploads/${user._id}/${mygallery.file.fileName}" target="_blank"><img src ="http://localhost:5000/uploads/${user._id}/${mygallery.file.fileName}" style="width:Auto; height: 150px;"></a><br>
+                                        <i click.trigger="editPhotos(mygallery)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
+                                        <i click.trigger="deletePhotos(mygallery)"class="fa fa-trash rightMargin" aria-hidden="true"></i>
+                                    </td>   
+                                    <td>
+                            <!-- <i click.trigger="editPhotos(mygallery)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
+                            <i click.trigger="deletePhotos(mygallery)"class="fa fa-trash rightMargin" aria-hidden="true"></i> -->
                             </td>
                                         
                             </tr>
@@ -30,7 +34,8 @@
                     </table>
             </div>
             <div show.bind="!mygalleries.mygalleryArray.length">
-                <h2>Apparently, you don't have anything to do!</h2>
+                    <br><br>
+                <h2>Apparently, you don't have any pictures!!!</h2>
             </div>
         
                 </div>

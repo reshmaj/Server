@@ -1,36 +1,37 @@
 <template>
-        <div class=“container”>
-            <div class="card topMargin">
+        <div class="container">
+                <span><i click.trigger="back()" class="fa fa-arrow-left fa-lg" 	aria-hidden="true"></i></span>
+                
+            <!-- <div class="card topMargin">
                 <div class="card-body">
-                    <span><i click.trigger="back()" class="fa fa-arrow-left fa-lg" 	aria-hidden="true"></i></span>
+                    
                 </div>
-            </div>	
+            </div>	 -->
+            
             <form>
                 <div class="form-group topMargin">
-                      <label for="mypicInput">Gallery *</label>
+                      <label for="mypicInput">Gallery*:</label>
                       <input value.bind="mypicObj.mypic" type="text" class="form-control" id="mypicInput" aria-describedby="mypicHelp" 
                         placeholder="Enter Gallery Name">
                       <small id="mypicHelp" class="form-text text-muted">
                         A short name for the Gallery.</small>
                 </div>
                 <div class="form-group">
-                    <label for="descriptionInput">Description</label>
-                    <textarea value.bind="mypicObj.description" type="text" class="form-control" 
-                    id="descriptionInput" aria-describedby="descriptionHelp" 
-                    placeholder="Enter Description"></textarea>
-                    <small id="descriptionHelp" class="form-text text-muted">
+                    <label for="descInput">Description:</label>
+                    <input value.bind="mypicObj.description" type="text" class="form-control" id="descInput" aria-describedby="descHelp" 
+                    placeholder="Enter Description">
+                    <small id="descHelp" class="form-text text-muted">
                     A gallery description.</small>
                 </div>
-    </div>
+    
         <div class="form-group">
-                    
-                        <div class="form-group">
-                            <label for="dateCreatedInput">Date Created *</label>
+                            <label for="dateCreatedInput">Date Created*:</label>
                             <input type="date" class="form-control" value.bind="mypicObj.dateCreated">
                             <small id="dateCreatedHelp" class="form-text text-muted">
                         The gallery creation date.</small>
                         </div>  
                         <button click.trigger="saveMypic()" class="btn btn-primary topMargin">Save</button>
                     </form>
+            </div>
                 </template>
                         

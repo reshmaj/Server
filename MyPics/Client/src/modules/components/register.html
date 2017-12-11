@@ -1,9 +1,35 @@
 <template>
-First Name: <input value.bind="user.firstName">
-Last Name: <input value.bind="user.lastName">
-Email: <input value.bind="user.email">
-Password: <input value.bind="user.password">
-<button click.trigger="save()">Save</button>
-<button click.trigger="cancel()">Cancel</button>
-</template>
+              <h3 style="text-align:center;"><b>Registration</b></h3>
+                <form class="col-lg-4 col-lg-offset-4" id="RegistrationForm">
+                <div innerhtml.bind="registerError"></div>
+              
+                <div class="form-group"> 
+                    <label for="InputFirstName"><b>First Name:</b></label>
+                    <input type="text" class="form-control" id="InputFirstName" 
+                aria-describedby="firstNameHelp" placeholder="Enter first name"
+                        value.bind="user.firstName">
+                </div>
         
+                <div class="form-group">
+                    <label for="InputLastName"><b>Last Name:</b></label>
+                    <input type="text" class="form-control" id="InputLastName" aria-describedby="lastNameHelp" placeholder="Enter last name" value.bind="user.lastName">
+                </div>
+        
+              <div class="form-group">
+                    <label for="InputEmail"><b>Email:</b></label>
+                    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email"
+                        value.bind="user.email">
+                </div>
+        
+                <div class="form-group">
+                        <label for="password"><b>Password:</b></label>
+                        <input value.bind="user.password" type="password" class="form-control" id="password" placeholder="Enter Password"></input>
+                      </div>
+                </div>
+        
+            
+            <button click.delegate="save()" class="btn btn-primary">Save</button>
+        </form>
+  
+        
+        </template>

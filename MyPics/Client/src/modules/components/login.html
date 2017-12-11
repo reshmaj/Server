@@ -1,10 +1,24 @@
 <template>
-<div id="errorMsg" innerhtml.bind="loginError"></div>
-<label for="email">Email</label>
- <input value.bind="email" type="email" autofocus class="form-control" id="email" placeholder="Email"></input>
- <label for="password">Password</label>
-  <input value.bind="password" type="password" class="form-control" id="password" placeholder="Password"></input>
-  <button click.trigger="login()">Login</button>  
-<span class="registerLink" click.trigger="showRegister()">Register</span>
-        </template>
-        
+                        <div>
+                        <br>
+                       
+                        <h3 style="text-align: center;"><b>Welcome to MyPics Page!!</b></h3> 
+                
+                        <form class="col-lg-4 col-lg-offset-4" id="LoginForm">
+                        <br>
+                        <div innerhtml.bind="loginError"></div>
+                        <div class="form-group">
+                        <label for="email"><b>Email:</b></label>
+                         <input value.bind="email" type="email" autofocus class="form-control" id="email" placeholder="Email"></input>
+                         </div>
+                         <div class="form-group">
+                         <label for="password"><b>Password:</b></label>
+                          <input value.bind="password" type="password" class="form-control" id="password" placeholder="Password"></input>
+                        </div>
+                        <button class="btn btn-primary" click.trigger='login()'>Login</button>
+                        <a href="" class="text-muted" click.trigger="showRegister()">Register</a>
+                    </form>
+                </div>
+                </div>
+                </template>
+                
