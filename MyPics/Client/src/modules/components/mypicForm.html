@@ -1,37 +1,28 @@
 <template>
+        
         <div class="container">
-                <span><i click.trigger="back()" class="fa fa-arrow-left fa-lg" 	aria-hidden="true"></i></span>
                 
-            <!-- <div class="card topMargin">
-                <div class="card-body">
-                    
-                </div>
-            </div>	 -->
-            
-            <form>
+            <span><i click.trigger="back()" class="fa fa-arrow-left fa-lg" 	aria-hidden="true"></i></span>
+            <h1 style="font-family: chiller;color:#FF7F00; text-align:center;"><b>Gallery 😊!!</b></h1>    
+                <form>
                 <div class="form-group topMargin">
-                      <label for="mypicInput">Gallery*:</label>
+                      <label for="mypicInput" style="color:black;font-size:180%;font-family: chiller;"><b>Gallery*:</b></label>
                       <input value.bind="mypicObj.mypic" type="text" class="form-control" id="mypicInput" aria-describedby="mypicHelp" 
-                        placeholder="Enter Gallery Name">
-                      <small id="mypicHelp" class="form-text text-muted">
-                        A short name for the Gallery.</small>
+                        placeholder="Enter Gallery Name" style="color:black;font-size:120%;font-family: chiller;">
+                      <small id="mypicHelp" class="form-text text-muted" style="color:black;font-size:100%;font-family: chiller;">
+                        <b>A short name for the Gallery.</b></small>
                 </div>
-                <div class="form-group">
-                    <label for="descInput">Description:</label>
-                    <input value.bind="mypicObj.description" type="text" class="form-control" id="descInput" aria-describedby="descHelp" 
-                    placeholder="Enter Description">
-                    <small id="descHelp" class="form-text text-muted">
-                    A gallery description.</small>
-                </div>
+ <div class="form-group">
+ <label for="descInput" style="color:black;font-size:160%;font-family: chiller;"><b>Description:</b></label>
+<input value.bind="mypicObj.description" type="text" class="form-control" id="descInput" aria-describedby="descHelp" placeholder="Enter Description" style="color:black;font-size:120%;font-family: chiller;"><small id="descHelp" class="form-text text-muted" style="color:black;font-size:100%;font-family: chiller;"><b>A gallery description.</b></small>
+ </div>
     
         <div class="form-group">
-                            <label for="dateCreatedInput">Date Created*:</label>
-                            <input type="date" class="form-control" value.bind="mypicObj.dateCreated">
-                            <small id="dateCreatedHelp" class="form-text text-muted">
-                        The gallery creation date.</small>
-                        </div>  
-                        <button click.trigger="saveMypic()" class="btn btn-primary topMargin">Save</button>
-                    </form>
-            </div>
+       <label for="dateCreatedInput" style="color:black;font-size:160%;font-family: chiller;"><b>Date Created*:</b></label><flat-picker value.bind="mypicObj.dateCreated"></flat-picker><small id="dateCreatedHelp" class="form-text text-muted" style="color:black;font-size:100%;font-family: chiller;"><b>The gallery creation date.</b></small>
+</div>  
+<button click.trigger="saveMypic()" class="btn btn-primary topMargin" style="color:black;font-size:180%;font-family: chiller;"><b>Save</b></button>
+                 
+             </form>
+        </div>  
                 </template>
                         

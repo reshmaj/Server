@@ -1,33 +1,32 @@
 <template>
-        <h2 style="text-align:center;"><b>My Gallery List!!!</b></h2>
+        <h1 style="font-family: chiller;color:#FF7F00; text-align:center;"><b>My Gallery List 😊!!</b></h1>
         <div class="container">
             <div class="card topMargin">
                 <div class="card-body">
                     <div class="row">
                             <span class="col">
-                            <span class="rightMargin pull-right"><button type="button" class="btn btn-primary btn-md" click.trigger="logout()">Logout</button></span>
-                            <span class="rightMargin pull-left"><button type="button" class="btn btn-primary btn-md"  click.trigger="createMypic()">Create a Gallery</button></span>
+                            <span class="rightMargin pull-right"><button type="button" class="btn btn-primary btn-md" click.trigger="logout()" style="text-align:center; color:black;font-size:150%;font-family: chiller;"><b>Logout</b></button></span>
+                            <span class="leftMargin pull-left"><button type="button" class="btn btn-primary btn-md"  click.trigger="createMypic()" style="text-align:center; color:black;font-size:150%;font-family: chiller;"><b>Create a Gallery</b></button></span>
                         </span>
                     </div>
         <br>
-        <br>
         <div show.bind="mypics.mypicsArray.length">
-                <div class="table-responsive">      
-                <table class="table">
+                   
+                <table class="table table-striped">
                         <thead> 
                             <tr>
-                                <th bgcolor="#90B9D9" style="text-align:center; color:black;font-size:150%;"><b>Gallery</b></th>
-                                <th bgcolor="#90B9D9" style="text-align:center;color:black;font-size:150%;">Date Created</th>
-                                <th bgcolor="#90B9D9" style="text-align:center;color:black;font-size:150%;">Description</th>
-                                <th bgcolor="#90B9D9" style="text-align:center;color:black;font-size:150%;">Edit</th>
+                                <th bgcolor="#FF7F00" style="text-align:center; color:black;font-size:160%;font-family: chiller;">Gallery</th>
+                                <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Date Created</th>
+                                <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Description</th>
+                                <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Edit</th>
                              </tr>
                         </thead>
                         <tbody>
                             <tr repeat.for = "mypic of mypics.mypicsArray">
-                                <td click.trigger="showPhotos(mypic)" style="text-align:center">${mypic.mypic}</td>
+                                <td click.trigger="showPhotos(mypic)" style="text-align:center;font-family: chiller;font-size:140%;">${mypic.mypic}</td>
                                 <!-- <td>${mypic.mypic}</td> -->
-                                <td style="text-align:center">${mypic.dateCreated | dateFormat}</td>
-                                <td style="text-align:center">${mypic.description}</td>
+                                <td style="text-align:center;font-family: chiller;font-size:140%;">${mypic.dateCreated | dateFormat}</td>
+                                <td style="text-align:center;font-family: chiller;font-size:140%;">${mypic.description}</td>
                                 <td style="text-align:center">
                             <i click.trigger="editMypic(mypic)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
                             <i click.trigger="deleteMypic(mypic)"class="fa fa-trash rightMargin" aria-hidden="true"></i>
@@ -41,11 +40,11 @@
             </div>
             <div show.bind="!mypics.mypicsArray.length">
                 <br><br>
-                <h2>Apparently, you don't have any Gallery!!!</h2>
+                <h2 style="text-align:center; color:black;font-family: chiller;">Apparently, you don't have any Gallery ☹!!!</h2>
             </div>
         
                 </div>
         </div>
-            </div>
+           
         
         </template>
