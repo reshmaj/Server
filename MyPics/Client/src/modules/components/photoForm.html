@@ -12,9 +12,10 @@
             <br>
             <br>
            
-            <form align="center">
-                    <div class="row">
-                    <div class="col-6">
+            <form>
+                    <div style="border:2px solid black; text-align:center">
+                    <!-- <div class="col-6" > -->
+                        <br><br>
                         <label class="btn btn-primary" style="color:black;font-size:160%;font-family: chiller;">
                             <b>Browse for Photos</b> <input type="file" 
                             style="display: none;" 
@@ -22,24 +23,23 @@
                             </label>
                             <small id="fileHelp" class="form-text text-muted" style="color:black;font-size:100%;font-family: chiller;">
                             <b>Upload a photo in the gallery 😊.</b></small>
-                            </div>	
+                            <!-- </div>	 -->
                             <br>
-                                    <div class="col-6">
+                                    <!-- <div class="col-6"> -->
                                         <ul>
                                             <li repeat.for="file of filesToUpload" class="list-group-item">
                                                 ${file.name}<span click.delegate="removeFile($index)" 
                                                 class="pull-right"><i class="fa fa-trash" aria-hidden="true">
                                                 </i></span></li>
                                         </ul>
-                                    </div>
+                                    <!-- </div> -->
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <button click.trigger="savePhotos()" class="btn btn-primary topMargin" style="color:black;font-size:160%;font-family: chiller;"><b>Save Photo</b></button>
+                                <br>
+                                <br>
                                 </div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                
-                                <button click.trigger="savePhotos()" class="btn btn-primary topMargin" style="color:black;font-size:160%;font-family: chiller;"><b>Save Photo</b></button>
-                            </form>
+                           </form>
                     </div>
                     </template>
