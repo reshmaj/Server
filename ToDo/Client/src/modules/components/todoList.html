@@ -36,7 +36,7 @@
                                         <td style="text-align:center">${todo.todo}</td>
                                         <td style="text-align:center">${todo.datedue | dateFormat}</td>
                                         <td style="text-align:center">${todo.priority}</td>
-                                        <td style="text-align:center"><a href="http://localhost:5000/uploads/${user._id}/${todo.file.fileName}" target="_blank">${todo.file.originalName}</a></td>
+                                        <td style="text-align:center"><a href="uploads/${user._id}/${todo.file.fileName}" target="_blank">${todo.file.originalName}</a></td>
                                         <td style="text-align:center">
                                         <i click.trigger="editTodo(todo)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
                                         <i click.trigger="deleteTodo(todo)" class="fa fa-trash rightMargin" aria-hidden="true"></i>
