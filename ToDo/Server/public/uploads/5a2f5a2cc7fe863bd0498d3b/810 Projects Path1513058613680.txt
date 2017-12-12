@@ -1,0 +1,4 @@
+Name - Reshma Jadhav
+GitHub Path - https://github.com/reshmaj/Server
+
+Note: Server folder has the MyPics & ToDos projects.
