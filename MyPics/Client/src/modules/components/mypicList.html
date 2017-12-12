@@ -16,17 +16,16 @@
                         <thead> 
                             <tr>
                                 <th bgcolor="#FF7F00" style="text-align:center; color:black;font-size:160%;font-family: chiller;">Gallery</th>
-                                <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Date Created</th>
                                 <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Description</th>
+                                <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Date Created</th>
                                 <th bgcolor="#FF7F00" style="text-align:center;color:black;font-size:160%;font-family: chiller;">Edit</th>
                              </tr>
                         </thead>
                         <tbody>
                             <tr repeat.for = "mypic of mypics.mypicsArray">
                                 <td click.trigger="showPhotos(mypic)" style="text-align:center;font-family: chiller;font-size:140%;">${mypic.mypic}</td>
-                                <!-- <td>${mypic.mypic}</td> -->
-                                <td style="text-align:center;font-family: chiller;font-size:140%;">${mypic.dateCreated | dateFormat}</td>
                                 <td style="text-align:center;font-family: chiller;font-size:140%;">${mypic.description}</td>
+                                <td style="text-align:center;font-family: chiller;font-size:140%;">${mypic.dateCreated | dateFormat}</td>
                                 <td style="text-align:center">
                             <i click.trigger="editMypic(mypic)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
                             <i click.trigger="deleteMypic(mypic)"class="fa fa-trash rightMargin" aria-hidden="true"></i>
