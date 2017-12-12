@@ -53,9 +53,7 @@ save(){
 	this.showLogin = true;
 }
 
-cancel(){
-	this.showLogin = true;
-}
+
 }
 
 

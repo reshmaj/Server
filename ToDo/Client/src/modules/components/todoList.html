@@ -36,8 +36,7 @@
                                         <td style="text-align:center">${todo.todo}</td>
                                         <td style="text-align:center">${todo.datedue | dateFormat}</td>
                                         <td style="text-align:center">${todo.priority}</td>
-                                        <!-- <td><a href="uploads/${user._id}/${todo.file.filename}" target="_blank">${todo.file.originalName}</a></td> -->
-                                        <td style="text-align:center"><a href="http://localhost:5000/uploads/${user._id}/${todo.file.fileName}" 	target="_blank">${todo.file.originalName}</a></td>
+                                        <td style="text-align:center"><a href="http://localhost:5000/uploads/${user._id}/${todo.file.fileName}" target="_blank">${todo.file.originalName}</a></td>
                                         <td style="text-align:center">
                                         <i click.trigger="editTodo(todo)" class="fa fa-pencil rightMargin" aria-hidden="true"></i>
                                         <i click.trigger="deleteTodo(todo)" class="fa fa-trash rightMargin" aria-hidden="true"></i>
@@ -50,7 +49,8 @@
             </table>
             </div>
                     <div show.bind="!todos.todosArray.length">
-                        <h2>Apparently, you don't have anything to do!</h2>
+                        <br><br>
+                        <h2 style="text-align:center;">Apparently, you don't have anything to do!!</h2>
                     </div>
                 </div>
             </div>
