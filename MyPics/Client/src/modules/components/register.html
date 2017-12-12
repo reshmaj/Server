@@ -1,36 +1,36 @@
 <template>
-        <h1 style="font-family: chiller;color:#FF7F00; margin-left:15px;"><b>Registration Page!</b></h1>
-                <form class="col-lg-4 col-lg-offset-4" id="RegistrationForm">
-                <div innerhtml.bind="registerError"></div>
-              
-                <div class="form-group"> 
-                    <label for="InputFirstName" style="color:black;font-family: chiller;font-size:160%;"><b>First Name:</b></label>
-                    <input type="text" class="form-control" id="InputFirstName" 
-                aria-describedby="firstNameHelp" placeholder="Enter first name"
-                        value.bind="user.firstName" style="font-family: chiller;font-size:100%;">
-                </div>
+    <h1 style="font-family: chiller;color:#FF7F00; margin-left:15px;"><b>Registration Page!</b></h1>
+            <form class="col-lg-4 col-lg-offset-4" id="RegistrationForm">
+            <div innerhtml.bind="registerError"></div>
+          
+            <div class="form-group"> 
+                <label for="InputFirstName" style="color:black;font-family: chiller;font-size:160%;"><b>First Name:</b></label>
+                <input type="text" class="form-control" id="InputFirstName" 
+            aria-describedby="firstNameHelp" placeholder="Enter first name"
+                    value.bind="user.firstName" style="font-family: chiller;font-size:100%;">
+            </div>
+    
+            <div class="form-group">
+                <label for="InputLastName" style="color:black;font-family: chiller;font-size:160%;"><b>Last Name:</b></label>
+                <input type="text" class="form-control" id="InputLastName" aria-describedby="lastNameHelp" placeholder="Enter last name" value.bind="user.lastName" style="font-family: chiller;font-size:100%;">
+            </div>
+    
+          <div class="form-group">
+                <label for="InputEmail" style="color:black;font-family: chiller;font-size:160%;"><b>Email:</b></label>
+                <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email"
+                    value.bind="user.email" style="font-family: chiller;font-size:100%;">
+            </div>
+    
+            <div class="form-group">
+                    <label for="password" style="color:black;font-family: chiller;font-size:160%;"><b>Password:</b></label>
+                    <input value.bind="user.password" type="password" class="form-control" id="password" placeholder="Enter Password" style="font-family: chiller;font-size:100%;"></input>
+                  </div>
+            </div>
+    
         
-                <div class="form-group">
-                    <label for="InputLastName" style="color:black;font-family: chiller;font-size:160%;"><b>Last Name:</b></label>
-                    <input type="text" class="form-control" id="InputLastName" aria-describedby="lastNameHelp" placeholder="Enter last name" value.bind="user.lastName" style="font-family: chiller;font-size:100%;">
-                </div>
-        
-              <div class="form-group">
-                    <label for="InputEmail" style="color:black;font-family: chiller;font-size:160%;"><b>Email:</b></label>
-                    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email"
-                        value.bind="user.email" style="font-family: chiller;font-size:100%;">
-                </div>
-        
-                <div class="form-group">
-                        <label for="password" style="color:black;font-family: chiller;font-size:160%;"><b>Password:</b></label>
-                        <input value.bind="user.password" type="password" class="form-control" id="password" placeholder="Enter Password" style="font-family: chiller;font-size:100%;"></input>
-                      </div>
-                </div>
-        
-            
-            <button click.delegate="save()" class="btn btn-primary" style="color:black;font-family: chiller;font-size:160%;"><b>Save</b></button>
-           
-        </form>
-  
-        
-        </template>
+        <button click.delegate="save()" class="btn btn-primary" style="color:black;font-family: chiller;font-size:160%;"><b>Save</b></button>
+       
+    </form>
+
+    
+    </template>
